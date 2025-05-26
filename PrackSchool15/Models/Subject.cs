@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrackSchool15;
+namespace PrackSchool15.Models;
 
 public partial class Subject
 {

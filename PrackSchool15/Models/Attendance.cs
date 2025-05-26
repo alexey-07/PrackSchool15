@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrackSchool15;
+namespace PrackSchool15.Models;
 
-public partial class Grade
+public partial class Attendance
 {
-    public int GradeId { get; set; }
+    public int AttendanceId { get; set; }
 
     public int StudentId { get; set; }
 
     public int LessonId { get; set; }
 
-    public int? Grade1 { get; set; }
+    public DateOnly? AttendanceDate { get; set; }
 
-    public DateOnly? GradeDate { get; set; }
+    public bool? IsPresent { get; set; }
 
-    public string? Comment { get; set; }
+    public string? ReasonForAbsence { get; set; }
 
     public virtual Lesson Lesson { get; set; } = null!;
 
