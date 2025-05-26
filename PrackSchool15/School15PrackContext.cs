@@ -233,6 +233,7 @@ public partial class School15PrackContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("teacher_id");
             entity.Property(e => e.HireDate).HasColumnName("hire_date");
+            entity.Property(e => e.Qualification).HasColumnName("qualification");
             entity.Property(e => e.Salary)
                 .HasPrecision(10, 2)
                 .HasColumnName("salary");

@@ -15,6 +15,22 @@ public partial class Teacher
 
     public decimal? Salary { get; set; }
 
+    public string? Qualification { get; set; }
+
+    public string? NameTeacher { get; set; }
+
+    public string? SurnameTeacher { get; set; }
+
+    public string? PatronymicTeacher { get; set; }
+
+    public string? EducationTeacher { get; set; }
+
+    public string? AdressTeacher { get; set; }
+
+    public string? NumberTeacher { get; set; }
+
+    public string? EmailTeacher { get; set; }
+
     public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
     public virtual ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();

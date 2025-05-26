@@ -150,6 +150,7 @@
             buttonTeach.TabIndex = 1;
             buttonTeach.Text = "Просмотр учителей";
             buttonTeach.UseVisualStyleBackColor = true;
+            buttonTeach.Click += buttonTeach_Click;
             // 
             // buttonStud
             // 
@@ -160,6 +161,7 @@
             buttonStud.TabIndex = 0;
             buttonStud.Text = "Просмотр учеников";
             buttonStud.UseVisualStyleBackColor = true;
+            buttonStud.Click += buttonStud_Click;
             // 
             // FormMain
             // 
