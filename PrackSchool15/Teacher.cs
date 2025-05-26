@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace PrackSchool15;
+
+public partial class Teacher
+{
+    public int TeacherId { get; set; }
+
+    public int UserId { get; set; }
+
+    public int? SubjectId { get; set; }
+
+    public DateOnly? HireDate { get; set; }
+
+    public decimal? Salary { get; set; }
+
+    public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
+
+    public virtual ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
+
+    public virtual Subject? Subject { get; set; }
+
+    public virtual User User { get; set; } = null!;
+}
