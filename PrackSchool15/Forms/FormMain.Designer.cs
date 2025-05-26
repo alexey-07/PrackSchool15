@@ -140,6 +140,7 @@
             buttonClass.TabIndex = 2;
             buttonClass.Text = "Просмотр классов";
             buttonClass.UseVisualStyleBackColor = true;
+            buttonClass.Click += buttonClass_Click;
             // 
             // buttonTeach
             // 

@@ -22,5 +22,11 @@ namespace PrackSchool15
             FormTeachers formTeachers = new FormTeachers();
             formTeachers.ShowDialog();
         }
+
+        private void buttonClass_Click(object sender, EventArgs e)
+        {
+            FormClasses formClasses = new FormClasses();
+            formClasses.ShowDialog();
+        }
     }
 }

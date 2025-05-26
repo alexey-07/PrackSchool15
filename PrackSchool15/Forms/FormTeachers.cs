@@ -18,8 +18,42 @@ namespace PrackSchool15
         {
             InitializeComponent();
         }
-
         protected override void OnLoad(EventArgs e)
+        {
+
+            base.OnLoad(e);
+
+            db = new School15PrackContext();
+            db.Teachers.Include(c => c.Classes).Load();
+
+
+            // Преобразуем список в новый объект, где видно название группы
+            var teacherWithClass = db.Teachers.Local
+                .Select(c => new
+                {
+                    c.TeacherId,
+                    Юзер = c.UserId,
+                    Предмет = c.SubjectId,
+                    /* Группа = c.Class != null ? c.Class.ClassName : "—",*/
+                    ДатаПриемаНаРаботу = c.HireDate,
+                    Зарплата = c.Salary,
+                    Квалификация = c.Qualification,
+                    ИмяУчителя = c.NameTeacher,
+                    ФамилияУчителя = c.SurnameTeacher,
+                    Отечество = c.PatronymicTeacher,
+                    Образование = c.EducationTeacher,
+                    Адрес = c.AdressTeacher,
+                    НомерТелефона = c.NumberTeacher,
+                    Почта = c.EmailTeacher
+                }).ToList();
+
+            dataGridViewTeacher.DataSource = teacherWithClass;
+
+            dataGridViewTeacher.Columns["teacherid"].Visible = false;
+
+        }
+
+        /*protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             this.db = new School15PrackContext();
@@ -27,8 +61,10 @@ namespace PrackSchool15
             this.dataGridViewTeacher.DataSource = this.db.Teachers.Local.OrderBy(o => o.HireDate).ToList();
             dataGridViewTeacher.Columns["Teacherid"].Visible = false;
             dataGridViewTeacher.Columns["userid"].Visible = false;
-            dataGridViewTeacher.Columns["subjectid"].Visible = false;
+           *//* dataGridViewTeacher.Columns["class"].Visible = false;
+            dataGridViewTeacher.Columns["user"].Visible = false;
+            dataGridViewTeacher.Columns["subject"].Visible = false;*//*
 
-        }
+        }*/
     }
 }
