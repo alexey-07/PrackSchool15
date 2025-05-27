@@ -120,6 +120,7 @@
             buttonLesson.TabIndex = 4;
             buttonLesson.Text = "Просмотр  расписания";
             buttonLesson.UseVisualStyleBackColor = true;
+            buttonLesson.Click += buttonLesson_Click;
             // 
             // buttonGrade
             // 

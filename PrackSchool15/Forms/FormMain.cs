@@ -34,5 +34,11 @@ namespace PrackSchool15
             FormGrades formGrades = new FormGrades();
             formGrades.ShowDialog();
         }
+
+        private void buttonLesson_Click(object sender, EventArgs e)
+        {
+            FormLessons formLessons = new FormLessons();
+            formLessons.ShowDialog();
+        }
     }
 }
