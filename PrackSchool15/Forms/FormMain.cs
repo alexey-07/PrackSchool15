@@ -40,5 +40,11 @@ namespace PrackSchool15
             FormLessons formLessons = new FormLessons();
             formLessons.ShowDialog();
         }
+
+        private void buttonAtten_Click(object sender, EventArgs e)
+        {
+            FormAttendance formAttendace = new FormAttendance();
+            formAttendace.ShowDialog();
+        }
     }
 }

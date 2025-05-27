@@ -110,6 +110,7 @@
             buttonAtten.TabIndex = 5;
             buttonAtten.Text = "Просмотр  посещаемости";
             buttonAtten.UseVisualStyleBackColor = true;
+            buttonAtten.Click += buttonAtten_Click;
             // 
             // buttonLesson
             // 
