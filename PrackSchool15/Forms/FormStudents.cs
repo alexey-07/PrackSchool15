@@ -26,6 +26,7 @@ namespace PrackSchool15
 
             db = new School15PrackContext();
             db.Students.Include(c => c.Class).Load();
+            db.Students.Include(c => c.User).Load();
 
 
             // Преобразуем список в новый объект, где видно название группы
@@ -33,9 +34,9 @@ namespace PrackSchool15
                 .Select(c => new
                 {
                     c.StudentId,
-                    Юзер = c.UserId,
+                    Юзер = c.User!=null ? c.User.Username : null,
                     Класс = c.ClassId,
-                    Группа = c.Class != null ? c.Class.ClassName : "—",
+                    Название = c.Class != null ? c.Class.ClassName : "—",
                     ДатаРождения = c.DateOfBirth,
                     Адрес = c.Address,
                     Телефон = c.PhoneNumber,

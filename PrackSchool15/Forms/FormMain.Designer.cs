@@ -130,6 +130,7 @@
             buttonGrade.TabIndex = 3;
             buttonGrade.Text = "Просмотр оценок";
             buttonGrade.UseVisualStyleBackColor = true;
+            buttonGrade.Click += buttonGrade_Click;
             // 
             // buttonClass
             // 

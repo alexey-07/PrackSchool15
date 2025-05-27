@@ -25,16 +25,18 @@ namespace PrackSchool15
 
             db = new School15PrackContext();
             db.Teachers.Include(c => c.Classes).Load();
+            db.Teachers.Include(c => c.Subject).Load();
+            db.Teachers.Include(c => c.User).Load();
 
 
-            // Преобразуем список в новый объект, где видно название группы
-            var teacherWithClass = db.Teachers.Local
+          // Преобразуем список в новый объект, где видно название группы
+          var teacherWithClass = db.Teachers.Local
                 .Select(c => new
                 {
                     c.TeacherId,
-                    Юзер = c.UserId,
-                    Предмет = c.SubjectId,
-                    /* Группа = c.Class != null ? c.Class.ClassName : "—",*/
+                    Юзер = c.User != null ? c.User.Username : null,
+                    Предмет = c.Subject != null ? c.Subject.SubjectName : null,
+                    /*Группа = c.Class != null ? c.Class.ClassName : null,*/
                     ДатаПриемаНаРаботу = c.HireDate,
                     Зарплата = c.Salary,
                     Квалификация = c.Qualification,
