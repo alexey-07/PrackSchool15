@@ -104,6 +104,7 @@
             buttonAddStud.TabIndex = 0;
             buttonAddStud.Text = "Добавить";
             buttonAddStud.UseVisualStyleBackColor = true;
+            buttonAddStud.Click += buttonAddStud_Click;
             // 
             // FormStudents
             // 

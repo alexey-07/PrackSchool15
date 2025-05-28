@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PrackSchool15.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

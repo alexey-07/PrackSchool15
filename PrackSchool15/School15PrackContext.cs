@@ -174,7 +174,7 @@ public partial class School15PrackContext : DbContext
             entity.HasIndex(e => e.UserId, "students_user_id_key").IsUnique();
 
             entity.Property(e => e.StudentId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('students_id_seq'::regclass)")
                 .HasColumnName("student_id");
             entity.Property(e => e.Address)
                 .HasMaxLength(255)
@@ -259,7 +259,7 @@ public partial class School15PrackContext : DbContext
             entity.HasIndex(e => e.Username, "users_username_key").IsUnique();
 
             entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('users_id_seq'::regclass)")
                 .HasColumnName("user_id");
             entity.Property(e => e.IsActive)
                 .HasDefaultValue(true)

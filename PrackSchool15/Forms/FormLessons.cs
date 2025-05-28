@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PrackSchool15.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace PrackSchool15
 {
-    
+
     public partial class FormLessons : Form
     {
         private School15PrackContext db;

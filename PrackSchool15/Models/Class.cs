@@ -16,5 +16,4 @@ public partial class Class
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 
     public virtual Teacher? Teacher { get; set; }
-
 }

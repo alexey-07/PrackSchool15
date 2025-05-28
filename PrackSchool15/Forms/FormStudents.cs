@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PrackSchool15.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +35,7 @@ namespace PrackSchool15
                 .Select(c => new
                 {
                     c.StudentId,
-                    Юзер = c.User!=null ? c.User.Username : null,
+                    Юзер = c.User != null ? c.User.Username : null,
                     Класс = c.ClassId,
                     Название = c.Class != null ? c.Class.ClassName : "—",
                     ДатаРождения = c.DateOfBirth,
@@ -56,5 +57,39 @@ namespace PrackSchool15
             this.db.Students.Load();
             this.dataGridViewStud.DataSource = this.db.Students.Local.OrderBy(o => o.ClassId).ToList();
         }
+
+        private void buttonAddStud_Click(object sender, EventArgs e)
+        {
+            using (FormStudentsAdd formAdd = new FormStudentsAdd())
+            {
+                DialogResult result = formAdd.ShowDialog(this);
+                if (result == DialogResult.Cancel) return;
+
+               
+                    //  Создаем нового студента
+                    Student newStudent = new Student
+                    {
+                        //  Получаем или создаем пользователя
+
+                        DateOfBirth = DateOnly.FromDateTime(formAdd.dateTimePickerDate.Value),
+                        Address = formAdd.textBoxAdress.Text,
+                        PhoneNumber = formAdd.textBoxNumber.Text,
+                        AdmissionDate = DateOnly.FromDateTime(formAdd.dateTimePickerAdm.Value),
+                        ParentName = formAdd.textBoxNameParents.Text,
+                        ParentPhone = formAdd.textBoxNumberParents.Text
+                       
+                    };
+
+                    // Добавляем в базу
+                    db.Students.Add(newStudent); // Исправлено на Students
+                    db.SaveChanges();
+
+                    MessageBox.Show("Новые данные о ребенке добавлены");
+                    LoadStudent(); // Обновляем данные в DataGridView
+                
+               
+            }
+        }
     }
 }
+
