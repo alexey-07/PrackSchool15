@@ -18,16 +18,26 @@ namespace PrackSchool15
     public partial class FormStudentsAdd : Form
     {
         private School15PrackContext db;
+        private Student currentStudent;
+        public Student SelectedStudent { get; }
+
         public FormStudentsAdd()
         {
             InitializeComponent();
         }
+
+
+        public FormStudentsAdd(Student selectedStudent)
+        {
+            SelectedStudent = selectedStudent;
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
             db = new School15PrackContext();
-          
+
             // Загрузка классов в ComboBox
             LoadClasses();
         }
@@ -39,55 +49,6 @@ namespace PrackSchool15
             comboBoxClass.ValueMember = "ClassId";   // Используем ID класса как значение
         }
 
-
-
-        /* private void buttonSave_Click(object sender, EventArgs e)
-         {
-             try
-             {
-                 //  Попытка найти существующего пользователя
-                 var existingUser = db.Users.FirstOrDefault(u => u.Username == textBoxUsername.Text);
-                 User user; // Объявляем переменную user
-                 if (existingUser == null)
-                 {
-                     //  Если пользователя не существует, создаем нового
-                     user = new User
-                     {
-                         Username = textBoxUsername.Text,
-                         Password = "defaultPassword", // Замените на безопасное хранение паролей
-                         Role = "Student"
-                     };
-                     db.Users.Add(user);
-                     db.SaveChanges(); // Сохраняем нового пользователя
-                 }
-                 else
-                 {
-                     //  Если пользователь существует, используем его
-                     user = existingUser;
-                 }
-
-                 // 2. Создание нового студента
-                 var newStudent = new Student
-                 {
-                     UserId = user.UserId, // Используем ID пользователя
-                     DateOfBirth = DateOnly.FromDateTime(dateTimePickerDate.Value),
-                     Address = textBoxAdress.Text,
-                     PhoneNumber = textBoxNumber.Text,
-                     AdmissionDate = DateOnly.FromDateTime(dateTimePickerDate.Value),
-                     ParentName = textBoxNameParents.Text,
-                     ParentPhone = textBoxNumberParents.Text,
-                 };
-                 db.Students.Add(newStudent);
-                 db.SaveChanges();
-
-                 MessageBox.Show("Студент успешно добавлен!");
-                 this.Close(); // Закрываем форму после успешного добавления
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}");
-             }
-         }*/
         private void buttonSave_Click(object sender, EventArgs e)
         {
             try
@@ -157,7 +118,13 @@ namespace PrackSchool15
                 MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}");
             }
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
- }
+}
 
   

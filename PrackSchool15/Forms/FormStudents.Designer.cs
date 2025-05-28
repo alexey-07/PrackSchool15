@@ -82,6 +82,7 @@
             buttonDelStud.TabIndex = 2;
             buttonDelStud.Text = "Удалить";
             buttonDelStud.UseVisualStyleBackColor = true;
+            buttonDelStud.Click += buttonDel_Click;
             // 
             // buttonEditStud
             // 

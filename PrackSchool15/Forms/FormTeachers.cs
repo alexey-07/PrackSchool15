@@ -15,15 +15,18 @@ namespace PrackSchool15
     public partial class FormTeachers : Form
     {
         private School15PrackContext db;
+        private BindingSource teachersBindingSource = new BindingSource();
         public FormTeachers()
         {
             InitializeComponent();
+        
         }
+      
         protected override void OnLoad(EventArgs e)
         {
 
             base.OnLoad(e);
-
+           /* LoadTeachers();*/ // Загружаем список преподавателей
             db = new School15PrackContext();
             db.Teachers.Include(c => c.Classes).Load();
             db.Teachers.Include(c => c.Subject).Load();
@@ -55,19 +58,28 @@ namespace PrackSchool15
             dataGridViewTeacher.Columns["teacherid"].Visible = false;
 
         }
-
-        /*protected override void OnLoad(EventArgs e)
+/*
+        private void LoadTeachers()
         {
-            base.OnLoad(e);
-            this.db = new School15PrackContext();
-            this.db.Teachers.Load();
-            this.dataGridViewTeacher.DataSource = this.db.Teachers.Local.OrderBy(o => o.HireDate).ToList();
-            dataGridViewTeacher.Columns["Teacherid"].Visible = false;
-            dataGridViewTeacher.Columns["userid"].Visible = false;
-           *//* dataGridViewTeacher.Columns["class"].Visible = false;
-            dataGridViewTeacher.Columns["user"].Visible = false;
-            dataGridViewTeacher.Columns["subject"].Visible = false;*//*
+            try
+            {
+                // Загружаем список преподавателей из базы данных
+                var teachers = db.Teachers.ToList();
+                teachersBindingSource.DataSource = teachers; // Привязываем BindingSource к списку преподавателей
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке преподавателей: {ex.Message}");
+            }
+        }
 
+        private void buttonAddTeach_Click(object sender, EventArgs e)
+        {
+            FormTeacherAdd addForm = new FormTeacherAdd(); // Создаем экземпляр FormTeacherAdd
+            addForm.ShowDialog(); // Открываем форму как модальное окно
+
+            // После закрытия FormTeacherAdd обновляем список преподавателей
+            LoadTeachers();
         }*/
     }
 }

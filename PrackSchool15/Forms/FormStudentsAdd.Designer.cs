@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelFill = new Panel();
+            labelPassword = new Label();
             textBoxPassword = new TextBox();
             textBoxUsername = new TextBox();
             dateTimePickerAdm = new DateTimePicker();
@@ -50,7 +51,6 @@
             panelBottom = new Panel();
             buttonCancel = new Button();
             buttonSave = new Button();
-            labelPassword = new Label();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAddStud).BeginInit();
             panelBottom.SuspendLayout();
@@ -84,6 +84,16 @@
             panelFill.Padding = new Padding(10);
             panelFill.Size = new Size(666, 608);
             panelFill.TabIndex = 0;
+            // 
+            // labelPassword
+            // 
+            labelPassword.AutoSize = true;
+            labelPassword.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelPassword.Location = new Point(39, 81);
+            labelPassword.Name = "labelPassword";
+            labelPassword.Size = new Size(70, 20);
+            labelPassword.TabIndex = 58;
+            labelPassword.Text = "Password";
             // 
             // textBoxPassword
             // 
@@ -260,6 +270,7 @@
             buttonCancel.TabIndex = 1;
             buttonCancel.Text = "Отмена";
             buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // buttonSave
             // 
@@ -272,16 +283,6 @@
             buttonSave.Text = "Сохранить";
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
-            // 
-            // labelPassword
-            // 
-            labelPassword.AutoSize = true;
-            labelPassword.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelPassword.Location = new Point(39, 81);
-            labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(70, 20);
-            labelPassword.TabIndex = 58;
-            labelPassword.Text = "Password";
             // 
             // FormStudentsAdd
             // 

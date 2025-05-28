@@ -104,6 +104,7 @@
             buttonAddTeach.TabIndex = 1;
             buttonAddTeach.Text = "Добавить";
             buttonAddTeach.UseVisualStyleBackColor = true;
+       
             // 
             // FormTeachers
             // 
