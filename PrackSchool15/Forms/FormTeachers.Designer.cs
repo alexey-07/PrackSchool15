@@ -104,7 +104,7 @@
             buttonAddTeach.TabIndex = 1;
             buttonAddTeach.Text = "Добавить";
             buttonAddTeach.UseVisualStyleBackColor = true;
-       
+            buttonAddTeach.Click += buttonAddTeach_Click;
             // 
             // FormTeachers
             // 
@@ -113,6 +113,7 @@
             ClientSize = new Size(911, 468);
             Controls.Add(panelFill);
             Name = "FormTeachers";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Учителя";
             panelFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewTeacher).EndInit();

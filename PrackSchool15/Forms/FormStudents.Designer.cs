@@ -114,6 +114,7 @@
             ClientSize = new Size(920, 503);
             Controls.Add(panelFill);
             Name = "FormStudents";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Студенты";
             panelFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewStud).EndInit();

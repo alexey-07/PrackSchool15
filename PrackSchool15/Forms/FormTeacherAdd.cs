@@ -27,7 +27,7 @@ namespace PrackSchool15
             base.OnLoad(e);
             db = new School15PrackContext();
             LoadSubjects();  // Загрузка предметов в ComboBox
-           /* LoadQualifications(); // Загрузка квалификаций в ComboBox*/
+            /* LoadQualifications(); // Загрузка квалификаций в ComboBox*/
         }
 
         private void LoadSubjects()
@@ -47,13 +47,13 @@ namespace PrackSchool15
         }*/
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
-            {
+           /* try
+            {*/
                 // 1. Валидация данных
                 if (string.IsNullOrWhiteSpace(textBoxTeachUsername.Text) ||
                     comboBoxSubject.SelectedItem == null ||
                     string.IsNullOrWhiteSpace(textBoxSalary.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxQual.Text)||
+                    string.IsNullOrWhiteSpace(textBoxQual.Text) ||
                     string.IsNullOrWhiteSpace(textBoxNameTeach.Text) ||
                     string.IsNullOrWhiteSpace(textBoxSurTeach.Text) ||
                     string.IsNullOrWhiteSpace(textBoxParTeach.Text) ||
@@ -66,24 +66,7 @@ namespace PrackSchool15
                     return;
                 }
 
-                // 2. Проверка на уникальность логина
-                /* string username = textBoxTeachUsername.Text.Trim();
 
-                 var existingUser = db.Users.FirstOrDefault(u => u.Username == username);
-                 if (existingUser != null)
-                 {
-                     MessageBox.Show("Пользователь с таким логином уже существует!");
-                     return;
-                 }
-
-                 // 3. Создание нового пользователя
-                 var newUser = new User
-                 {
-                     Username = username,
-                     Password = BCrypt.Net.BCrypt.HashPassword("defaultPassword"), // Хеширование пароля!
-                     // Добавьте RoleId для преподавателя (предположим, что у вас есть роль "Преподаватель")
-                     RoleId = db.Roles.FirstOrDefault(r => r.RoleName == "Преподаватель")?.RoleId ?? 0 //  или другое значение по умолчанию
-                 };*/
                 string username = textBoxTeachUsername.Text.Trim();
                 string password = textBoxPasswordTeach.Text.Trim();
 
@@ -107,8 +90,8 @@ namespace PrackSchool15
                 }
                 else
                 {
-                    //  Если роль "Ученик" не существует, создайте ее (если необходимо)
-                    var newRole = new Role { RoleName = "Учитель" };
+                //  Если роль "Учитель" не существует, создайте ее (если необходимо)
+                var newRole = new Role { RoleName = "Учитель" };
                     db.Roles.Add(newRole);
                     db.SaveChanges();
                     tacherRoleId = newRole.RoleId;
@@ -133,14 +116,14 @@ namespace PrackSchool15
                     HireDate = DateOnly.FromDateTime(dateTimePickerDateHare.Value),
                     Salary = decimal.Parse(textBoxSalary.Text), // Преобразуем зарплату в decimal
                     Qualification = textBoxQual.Text, // Получаем ID квалификации
-                   NameTeacher = textBoxNameTeach.Text,
-                    SurnameTeacher= textBoxSurTeach.Text,
+                    NameTeacher = textBoxNameTeach.Text,
+                    SurnameTeacher = textBoxSurTeach.Text,
                     PatronymicTeacher = textBoxParTeach.Text,
                     EducationTeacher = textBoxEduc.Text,
                     AdressTeacher = textBoxAdressTeach.Text,
                     NumberTeacher = textBoxNumberTeach.Text,
                     EmailTeacher = textBoxEmailTeach.Text
-                    
+
                 };
 
                 db.Teachers.Add(newTeacher);
@@ -148,15 +131,15 @@ namespace PrackSchool15
 
                 MessageBox.Show("Преподаватель успешно добавлен!");
                 this.Close(); // Закрываем форму
-            }
-            catch (EntityException ex)
+            
+            /*catch (EntityException ex)
             {
                 MessageBox.Show($"Ошибка базы данных: {ex.InnerException?.Message ?? ex.Message}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
-            }
+            }*/
         }
     }
 }

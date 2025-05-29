@@ -31,9 +31,9 @@
             panelFill = new Panel();
             dataGridViewAtten = new DataGridView();
             panelTop = new Panel();
-            buttonAddAtten = new Button();
-            buttonEditAtten = new Button();
             buttonDelAtten = new Button();
+            buttonEditAtten = new Button();
+            buttonAddAtten = new Button();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtten).BeginInit();
             panelTop.SuspendLayout();
@@ -72,16 +72,16 @@
             panelTop.Size = new Size(892, 56);
             panelTop.TabIndex = 0;
             // 
-            // buttonAddAtten
+            // buttonDelAtten
             // 
-            buttonAddAtten.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonAddAtten.Location = new Point(13, 5);
-            buttonAddAtten.Name = "buttonAddAtten";
-            buttonAddAtten.Padding = new Padding(5);
-            buttonAddAtten.Size = new Size(284, 45);
-            buttonAddAtten.TabIndex = 3;
-            buttonAddAtten.Text = "Добавить";
-            buttonAddAtten.UseVisualStyleBackColor = true;
+            buttonDelAtten.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonDelAtten.Location = new Point(593, 5);
+            buttonDelAtten.Name = "buttonDelAtten";
+            buttonDelAtten.Padding = new Padding(5);
+            buttonDelAtten.Size = new Size(284, 45);
+            buttonDelAtten.TabIndex = 5;
+            buttonDelAtten.Text = "Удалить";
+            buttonDelAtten.UseVisualStyleBackColor = true;
             // 
             // buttonEditAtten
             // 
@@ -94,16 +94,16 @@
             buttonEditAtten.Text = "Редактировать";
             buttonEditAtten.UseVisualStyleBackColor = true;
             // 
-            // buttonDelAtten
+            // buttonAddAtten
             // 
-            buttonDelAtten.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonDelAtten.Location = new Point(593, 5);
-            buttonDelAtten.Name = "buttonDelAtten";
-            buttonDelAtten.Padding = new Padding(5);
-            buttonDelAtten.Size = new Size(284, 45);
-            buttonDelAtten.TabIndex = 5;
-            buttonDelAtten.Text = "Удалить";
-            buttonDelAtten.UseVisualStyleBackColor = true;
+            buttonAddAtten.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonAddAtten.Location = new Point(13, 5);
+            buttonAddAtten.Name = "buttonAddAtten";
+            buttonAddAtten.Padding = new Padding(5);
+            buttonAddAtten.Size = new Size(284, 45);
+            buttonAddAtten.TabIndex = 3;
+            buttonAddAtten.Text = "Добавить";
+            buttonAddAtten.UseVisualStyleBackColor = true;
             // 
             // FormAttendance
             // 
@@ -112,6 +112,7 @@
             ClientSize = new Size(912, 490);
             Controls.Add(panelFill);
             Name = "FormAttendance";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Посещаемость";
             panelFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewAtten).EndInit();

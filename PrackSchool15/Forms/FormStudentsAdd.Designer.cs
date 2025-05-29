@@ -89,7 +89,7 @@
             // 
             labelPassword.AutoSize = true;
             labelPassword.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelPassword.Location = new Point(39, 81);
+            labelPassword.Location = new Point(29, 81);
             labelPassword.Name = "labelPassword";
             labelPassword.Size = new Size(70, 20);
             labelPassword.TabIndex = 58;
@@ -292,6 +292,7 @@
             ClientSize = new Size(666, 608);
             Controls.Add(panelFill);
             Name = "FormStudentsAdd";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Добавление";
             panelFill.ResumeLayout(false);
             panelFill.PerformLayout();

@@ -31,9 +31,9 @@
             panelFill = new Panel();
             dataGridViewLesson = new DataGridView();
             panelTop = new Panel();
-            buttonAddLesson = new Button();
-            buttonEditLesson = new Button();
             buttonDelLesson = new Button();
+            buttonEditLesson = new Button();
+            buttonAddLesson = new Button();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLesson).BeginInit();
             panelTop.SuspendLayout();
@@ -72,16 +72,16 @@
             panelTop.Size = new Size(896, 61);
             panelTop.TabIndex = 0;
             // 
-            // buttonAddLesson
+            // buttonDelLesson
             // 
-            buttonAddLesson.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonAddLesson.Location = new Point(13, 10);
-            buttonAddLesson.Name = "buttonAddLesson";
-            buttonAddLesson.Padding = new Padding(5);
-            buttonAddLesson.Size = new Size(284, 45);
-            buttonAddLesson.TabIndex = 3;
-            buttonAddLesson.Text = "Добавить";
-            buttonAddLesson.UseVisualStyleBackColor = true;
+            buttonDelLesson.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonDelLesson.Location = new Point(593, 10);
+            buttonDelLesson.Name = "buttonDelLesson";
+            buttonDelLesson.Padding = new Padding(5);
+            buttonDelLesson.Size = new Size(284, 45);
+            buttonDelLesson.TabIndex = 5;
+            buttonDelLesson.Text = "Удалить";
+            buttonDelLesson.UseVisualStyleBackColor = true;
             // 
             // buttonEditLesson
             // 
@@ -94,16 +94,16 @@
             buttonEditLesson.Text = "Редактировать";
             buttonEditLesson.UseVisualStyleBackColor = true;
             // 
-            // buttonDelLesson
+            // buttonAddLesson
             // 
-            buttonDelLesson.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonDelLesson.Location = new Point(593, 10);
-            buttonDelLesson.Name = "buttonDelLesson";
-            buttonDelLesson.Padding = new Padding(5);
-            buttonDelLesson.Size = new Size(284, 45);
-            buttonDelLesson.TabIndex = 5;
-            buttonDelLesson.Text = "Удалить";
-            buttonDelLesson.UseVisualStyleBackColor = true;
+            buttonAddLesson.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonAddLesson.Location = new Point(13, 10);
+            buttonAddLesson.Name = "buttonAddLesson";
+            buttonAddLesson.Padding = new Padding(5);
+            buttonAddLesson.Size = new Size(284, 45);
+            buttonAddLesson.TabIndex = 3;
+            buttonAddLesson.Text = "Добавить";
+            buttonAddLesson.UseVisualStyleBackColor = true;
             // 
             // FormLessons
             // 
@@ -112,6 +112,7 @@
             ClientSize = new Size(916, 477);
             Controls.Add(panelFill);
             Name = "FormLessons";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Расписание";
             panelFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewLesson).EndInit();

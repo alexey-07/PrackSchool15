@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             panelFill = new Panel();
-            panelTop = new Panel();
             dataGridViewGrade = new DataGridView();
-            buttonAddGrade = new Button();
-            buttonEditGrade = new Button();
+            panelTop = new Panel();
             buttonDelGrade = new Button();
+            buttonEditGrade = new Button();
+            buttonAddGrade = new Button();
             panelFill.SuspendLayout();
-            panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGrade).BeginInit();
+            panelTop.SuspendLayout();
             SuspendLayout();
             // 
             // panelFill
@@ -50,6 +50,16 @@
             panelFill.Size = new Size(912, 475);
             panelFill.TabIndex = 0;
             // 
+            // dataGridViewGrade
+            // 
+            dataGridViewGrade.BackgroundColor = Color.White;
+            dataGridViewGrade.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewGrade.Dock = DockStyle.Fill;
+            dataGridViewGrade.Location = new Point(10, 67);
+            dataGridViewGrade.Name = "dataGridViewGrade";
+            dataGridViewGrade.Size = new Size(892, 398);
+            dataGridViewGrade.TabIndex = 1;
+            // 
             // panelTop
             // 
             panelTop.Controls.Add(buttonDelGrade);
@@ -62,26 +72,16 @@
             panelTop.Size = new Size(892, 57);
             panelTop.TabIndex = 0;
             // 
-            // dataGridViewGrade
+            // buttonDelGrade
             // 
-            dataGridViewGrade.BackgroundColor = Color.White;
-            dataGridViewGrade.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewGrade.Dock = DockStyle.Fill;
-            dataGridViewGrade.Location = new Point(10, 67);
-            dataGridViewGrade.Name = "dataGridViewGrade";
-            dataGridViewGrade.Size = new Size(892, 398);
-            dataGridViewGrade.TabIndex = 1;
-            // 
-            // buttonAddGrade
-            // 
-            buttonAddGrade.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonAddGrade.Location = new Point(13, 6);
-            buttonAddGrade.Name = "buttonAddGrade";
-            buttonAddGrade.Padding = new Padding(5);
-            buttonAddGrade.Size = new Size(284, 45);
-            buttonAddGrade.TabIndex = 2;
-            buttonAddGrade.Text = "Добавить";
-            buttonAddGrade.UseVisualStyleBackColor = true;
+            buttonDelGrade.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonDelGrade.Location = new Point(593, 6);
+            buttonDelGrade.Name = "buttonDelGrade";
+            buttonDelGrade.Padding = new Padding(5);
+            buttonDelGrade.Size = new Size(284, 45);
+            buttonDelGrade.TabIndex = 4;
+            buttonDelGrade.Text = "Удалить";
+            buttonDelGrade.UseVisualStyleBackColor = true;
             // 
             // buttonEditGrade
             // 
@@ -94,16 +94,16 @@
             buttonEditGrade.Text = "Редактировать";
             buttonEditGrade.UseVisualStyleBackColor = true;
             // 
-            // buttonDelGrade
+            // buttonAddGrade
             // 
-            buttonDelGrade.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonDelGrade.Location = new Point(593, 6);
-            buttonDelGrade.Name = "buttonDelGrade";
-            buttonDelGrade.Padding = new Padding(5);
-            buttonDelGrade.Size = new Size(284, 45);
-            buttonDelGrade.TabIndex = 4;
-            buttonDelGrade.Text = "Удалить";
-            buttonDelGrade.UseVisualStyleBackColor = true;
+            buttonAddGrade.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonAddGrade.Location = new Point(13, 6);
+            buttonAddGrade.Name = "buttonAddGrade";
+            buttonAddGrade.Padding = new Padding(5);
+            buttonAddGrade.Size = new Size(284, 45);
+            buttonAddGrade.TabIndex = 2;
+            buttonAddGrade.Text = "Добавить";
+            buttonAddGrade.UseVisualStyleBackColor = true;
             // 
             // FormGrades
             // 
@@ -112,10 +112,11 @@
             ClientSize = new Size(912, 475);
             Controls.Add(panelFill);
             Name = "FormGrades";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Оценки";
             panelFill.ResumeLayout(false);
-            panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewGrade).EndInit();
+            panelTop.ResumeLayout(false);
             ResumeLayout(false);
         }
 

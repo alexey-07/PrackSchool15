@@ -47,7 +47,7 @@ public partial class School15PrackContext : DbContext
             entity.ToTable("attendance");
 
             entity.Property(e => e.AttendanceId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('attendance_id_seq'::regclass)")
                 .HasColumnName("attendance_id");
             entity.Property(e => e.AttendanceDate).HasColumnName("attendance_date");
             entity.Property(e => e.IsPresent).HasColumnName("is_present");
@@ -94,7 +94,7 @@ public partial class School15PrackContext : DbContext
             entity.ToTable("grades");
 
             entity.Property(e => e.GradeId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('grades_id_seq'::regclass)")
                 .HasColumnName("grade_id");
             entity.Property(e => e.Comment).HasColumnName("comment");
             entity.Property(e => e.Grade1).HasColumnName("grade");
@@ -230,7 +230,7 @@ public partial class School15PrackContext : DbContext
             entity.HasIndex(e => e.UserId, "teachers_user_id_key").IsUnique();
 
             entity.Property(e => e.TeacherId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('teachers_id_seq'::regclass)")
                 .HasColumnName("teacher_id");
             entity.Property(e => e.HireDate).HasColumnName("hire_date");
             entity.Property(e => e.Qualification).HasColumnName("qualification");

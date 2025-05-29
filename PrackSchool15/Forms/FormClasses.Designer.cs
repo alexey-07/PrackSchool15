@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             panelFill = new Panel();
-            panelTop = new Panel();
             dataGridViewClass = new DataGridView();
-            buttonAddClass = new Button();
-            buttonEditClass = new Button();
+            panelTop = new Panel();
             buttonDelClass = new Button();
+            buttonEditClass = new Button();
+            buttonAddClass = new Button();
             panelFill.SuspendLayout();
-            panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClass).BeginInit();
+            panelTop.SuspendLayout();
             SuspendLayout();
             // 
             // panelFill
@@ -50,6 +50,16 @@
             panelFill.Size = new Size(917, 457);
             panelFill.TabIndex = 0;
             // 
+            // dataGridViewClass
+            // 
+            dataGridViewClass.BackgroundColor = Color.White;
+            dataGridViewClass.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewClass.Dock = DockStyle.Fill;
+            dataGridViewClass.Location = new Point(10, 68);
+            dataGridViewClass.Name = "dataGridViewClass";
+            dataGridViewClass.Size = new Size(897, 379);
+            dataGridViewClass.TabIndex = 1;
+            // 
             // panelTop
             // 
             panelTop.Controls.Add(buttonDelClass);
@@ -62,26 +72,16 @@
             panelTop.Size = new Size(897, 58);
             panelTop.TabIndex = 0;
             // 
-            // dataGridViewClass
+            // buttonDelClass
             // 
-            dataGridViewClass.BackgroundColor = Color.White;
-            dataGridViewClass.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewClass.Dock = DockStyle.Fill;
-            dataGridViewClass.Location = new Point(10, 68);
-            dataGridViewClass.Name = "dataGridViewClass";
-            dataGridViewClass.Size = new Size(897, 379);
-            dataGridViewClass.TabIndex = 1;
-            // 
-            // buttonAddClass
-            // 
-            buttonAddClass.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonAddClass.Location = new Point(13, 7);
-            buttonAddClass.Name = "buttonAddClass";
-            buttonAddClass.Padding = new Padding(5);
-            buttonAddClass.Size = new Size(284, 45);
-            buttonAddClass.TabIndex = 1;
-            buttonAddClass.Text = "Добавить";
-            buttonAddClass.UseVisualStyleBackColor = true;
+            buttonDelClass.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonDelClass.Location = new Point(593, 7);
+            buttonDelClass.Name = "buttonDelClass";
+            buttonDelClass.Padding = new Padding(5);
+            buttonDelClass.Size = new Size(284, 45);
+            buttonDelClass.TabIndex = 3;
+            buttonDelClass.Text = "Удалить";
+            buttonDelClass.UseVisualStyleBackColor = true;
             // 
             // buttonEditClass
             // 
@@ -94,16 +94,16 @@
             buttonEditClass.Text = "Редактировать";
             buttonEditClass.UseVisualStyleBackColor = true;
             // 
-            // buttonDelClass
+            // buttonAddClass
             // 
-            buttonDelClass.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonDelClass.Location = new Point(593, 7);
-            buttonDelClass.Name = "buttonDelClass";
-            buttonDelClass.Padding = new Padding(5);
-            buttonDelClass.Size = new Size(284, 45);
-            buttonDelClass.TabIndex = 3;
-            buttonDelClass.Text = "Удалить";
-            buttonDelClass.UseVisualStyleBackColor = true;
+            buttonAddClass.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonAddClass.Location = new Point(13, 7);
+            buttonAddClass.Name = "buttonAddClass";
+            buttonAddClass.Padding = new Padding(5);
+            buttonAddClass.Size = new Size(284, 45);
+            buttonAddClass.TabIndex = 1;
+            buttonAddClass.Text = "Добавить";
+            buttonAddClass.UseVisualStyleBackColor = true;
             // 
             // FormClasses
             // 
@@ -112,10 +112,11 @@
             ClientSize = new Size(917, 457);
             Controls.Add(panelFill);
             Name = "FormClasses";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Классы";
             panelFill.ResumeLayout(false);
-            panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewClass).EndInit();
+            panelTop.ResumeLayout(false);
             ResumeLayout(false);
         }
 
