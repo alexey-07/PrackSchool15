@@ -57,6 +57,7 @@
             dataGridViewStud.Dock = DockStyle.Fill;
             dataGridViewStud.Location = new Point(15, 70);
             dataGridViewStud.Name = "dataGridViewStud";
+            dataGridViewStud.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewStud.Size = new Size(890, 418);
             dataGridViewStud.TabIndex = 1;
             // 
@@ -94,6 +95,7 @@
             buttonEditStud.TabIndex = 1;
             buttonEditStud.Text = "Редактировать";
             buttonEditStud.UseVisualStyleBackColor = true;
+            buttonEditStud.Click += buttonEdit_Click;
             // 
             // buttonAddStud
             // 

@@ -55,8 +55,22 @@ namespace PrackSchool15
 
         private void LoadStudent()
         {
-            this.db.Students.Load();
-            this.dataGridViewStud.DataSource = this.db.Students.Local.OrderBy(o => o.ClassId).ToList();
+            var studentWithClass = db.Students.Local
+               .Select(c => new
+               {
+                   c.StudentId,
+                   Юзер = c.User != null ? c.User.Username : null,
+                   Класс = c.ClassId,
+                   Название = c.Class != null ? c.Class.ClassName : "—",
+                   ДатаРождения = c.DateOfBirth,
+                   Адрес = c.Address,
+                   Телефон = c.PhoneNumber,
+                   ДатаЗачисления = c.AdmissionDate,
+                   Имя_Родителя = c.ParentName,
+                   ТелефонРодителей = c.ParentPhone
+               }).ToList();
+
+            dataGridViewStud.DataSource = studentWithClass; ;
         }
 
         private void buttonAddStud_Click(object sender, EventArgs e)
@@ -85,81 +99,110 @@ namespace PrackSchool15
                 db.Students.Add(newStudent); // Исправлено на Students
                 db.SaveChanges();
 
-                MessageBox.Show("Новые данные о ребенке добавлены");
+                MessageBox.Show("Новые данные о студенте добавлены");
                 LoadStudent(); // Обновляем данные в DataGridView
             }
         }
-        private Student GetSelectedStudent() //  Вместо GetSelectedChild()
+        /*private Student GetSelectedStudent() //  Вместо GetSelectedChild()
         {
             //  Если DataGridView привязан напрямую:
-            if (dataGridViewStud.SelectedRows.Count > 0)
+            *//*if (dataGridViewStud.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dataGridViewStud.SelectedRows[0];
                 return (Student)selectedRow.DataBoundItem; //  Получаем объект Student
-            }
-
-  
-
-            return null; //  Если ничего не выбрано
-        }
-
-        private void buttonEdit_Click(object sender, EventArgs e)
-        {
-            Student selectedStudent = GetSelectedStudent();
-
-            if (selectedStudent != null)
+            }*//*
+            if (dataGridViewStud.SelectedRows.Count > 0)
             {
-                FormStudentsAdd editForm = new FormStudentsAdd(selectedStudent); // Передаем выбранного студента в форму редактирования
-                editForm.ShowDialog(); // Открываем форму как модальное окно
+                return (Student)dataGridViewStud.SelectedRows[0].DataBoundItem;
+            }
+            return null;
 
-                // После закрытия формы редактирования обновляем список студентов
-                LoadStudent();
+
+        }*/
+       /* private Student GetSelectedStudent()
+        {
+            if (dataGridViewStud.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewStud.SelectedRows[0];
+                if (selectedRow.DataBoundItem is Student student)  // Безопасное приведение
+                {
+                    return student;
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка: Не удалось получить студента из DataGridView.  DataBoundItem имеет неверный тип.");
+                    return null;
+                }
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите студента для редактирования.");
+                MessageBox.Show("Пожалуйста, выберите студента.");
+                return null;
             }
         }
+*/
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            /*Student selectedStudent = GetSelectedStudent();*/
+            if(dataGridViewStud.SelectedRows.Count == 0)
+                return;
+            int id = (int)dataGridViewStud.SelectedRows[0].Cells["studentid"].Value;
+            var student=db.Students.FirstOrDefault(u=>u.StudentId == id);
 
+            if (student != null)
+            {
+                // Открываем форму редактирования, передаем выбранного студента
+                FormStudentsAdd editForm = new FormStudentsAdd(student);
+                if (editForm.ShowDialog() == DialogResult.OK)  //  Проверяем, что форма редактирования была закрыта успешно
+                {
+                    LoadStudent(); // Обновляем список студентов
+                }
+            }
+        }
+        /* private void buttonEdit_Click(object sender, EventArgs e)
+         {
+             Student selectedStudent = GetSelectedStudent();
+
+             if (selectedStudent != null)
+             {
+                 FormStudentsAdd editForm = new FormStudentsAdd(selectedStudent); // Передаем выбранного студента в форму редактирования
+                 editForm.ShowDialog(); // Открываем форму как модальное окно
+
+                 // После закрытия формы редактирования обновляем список студентов
+                 LoadStudent();
+             }
+             else
+             {
+                 MessageBox.Show("Пожалуйста, выберите студента для редактирования.");
+             }
+         }*/
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            Student selectedStudent = GetSelectedStudent(); // Используем наш метод
+            int id = (int)dataGridViewStud.SelectedRows[0].Cells["studentid"].Value;
+            var student = db.Students.FirstOrDefault(u => u.StudentId == id);
 
-            if (selectedStudent != null)
+            if (student != null)
             {
-                DialogResult confirmResult = MessageBox.Show(
-                    $"Вы уверены, что хотите удалить студента {selectedStudent.User.Username} {selectedStudent.Class.ClassId} {selectedStudent.Class.ClassName} {selectedStudent.DateOfBirth} " +
-                    $"{selectedStudent.Address} {selectedStudent.PhoneNumber} {selectedStudent.AdmissionDate} {selectedStudent.ParentName} {selectedStudent.ParentPhone}?",
-                "Подтверждение удаления",
+                var confirmResult = MessageBox.Show(
+                    "Вы уверены, что хотите удалить данные об этом студенте?",
+                    "Подтверждение удаления",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    try
-                    {
-                        db.Students.Remove(selectedStudent); // Удаляем из базы
-                        db.SaveChanges(); // Сохраняем
-
-                        MessageBox.Show("Данные о студенте удалены.");
-                        LoadStudent(); // Обновляем таблицу
-                    }
-                    catch (EntityException ex)
-                    {
-                        MessageBox.Show($"Ошибка базы данных: {ex.InnerException?.Message ?? ex.Message}");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Ошибка при удалении студента: {ex.Message}");
-                    }
+                    db.Students.Remove(student); // Удаляем из базы
+                    db.SaveChanges(); // Сохраняем
+                    MessageBox.Show("Данные о студенте удалены.");
+                    LoadStudent(); // Обновляем таблицу
                 }
             }
             else
             {
                 MessageBox.Show("Пожалуйста, выберите студента для удаления.");
             }
-
         }
+       
     }
 }
 

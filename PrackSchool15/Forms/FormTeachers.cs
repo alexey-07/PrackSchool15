@@ -60,16 +60,26 @@ namespace PrackSchool15
         }
         private void LoadTeachers()
         {
-           /* try
-            {*/
-                // Загружаем список преподавателей из базы данных
-                var teachers = db.Teachers.ToList();
-                teachersBindingSource.DataSource = teachers; // Привязываем BindingSource к списку преподавателей
-            /*}
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при загрузке преподавателей: {ex.Message}");
-            }*/
+            var teacherWithClass = db.Teachers.Local
+                   .Select(c => new
+                   {
+                       c.TeacherId,
+                       Юзер = c.User != null ? c.User.Username : null,
+                       Предмет = c.Subject != null ? c.Subject.SubjectName : null,
+                       /*Группа = c.Class != null ? c.Class.ClassName : null,*/
+                       ДатаПриемаНаРаботу = c.HireDate,
+                       Зарплата = c.Salary,
+                       Квалификация = c.Qualification,
+                       ИмяУчителя = c.NameTeacher,
+                       ФамилияУчителя = c.SurnameTeacher,
+                       Отечество = c.PatronymicTeacher,
+                       Образование = c.EducationTeacher,
+                       Адрес = c.AdressTeacher,
+                       НомерТелефона = c.NumberTeacher,
+                       Почта = c.EmailTeacher
+                   }).ToList();
+
+            dataGridViewTeacher.DataSource = teacherWithClass;
         }
         private void buttonAddTeach_Click(object sender, EventArgs e)
         {
@@ -77,28 +87,50 @@ namespace PrackSchool15
             addForm.ShowDialog(); // Открываем форму как модальное окно
 
         }
-        /*
-       private void LoadTeachers()
-       {
-           try
-           {
-               // Загружаем список преподавателей из базы данных
-               var teachers = db.Teachers.ToList();
-               teachersBindingSource.DataSource = teachers; // Привязываем BindingSource к списку преподавателей
-           }
-           catch (Exception ex)
-           {
-               MessageBox.Show($"Ошибка при загрузке преподавателей: {ex.Message}");
-           }
-       }
 
-       private void buttonAddTeach_Click(object sender, EventArgs e)
-       {
-           FormTeacherAdd addForm = new FormTeacherAdd(); // Создаем экземпляр FormTeacherAdd
-           addForm.ShowDialog(); // Открываем форму как модальное окно
+        private void buttonEditTeach_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewTeacher.SelectedRows.Count == 0)
+                return;
+            int id = (int)dataGridViewTeacher.SelectedRows[0].Cells["teacherid"].Value;
+            var teacher = db.Teachers.FirstOrDefault(u => u.TeacherId == id);
 
-           // После закрытия FormTeacherAdd обновляем список преподавателей
-           LoadTeachers();
-       }*/
+            if (teacher != null)
+            {
+                // Открываем форму редактирования, передаем выбранного студента
+                FormTeacherAdd editForm = new FormTeacherAdd(teacher);
+                if (editForm.ShowDialog() == DialogResult.OK)  //  Проверяем, что форма редактирования была закрыта успешно
+                {
+                    LoadTeachers(); // Обновляем список студентов
+                }
+            }
+        }
+
+        private void buttonDelTeach_Click(object sender, EventArgs e)
+        {
+            int id = (int)dataGridViewTeacher.SelectedRows[0].Cells["teacherid"].Value;
+            var teacher = db.Teachers.FirstOrDefault(u => u.TeacherId == id);
+
+            if (teacher != null)
+            {
+                var confirmResult = MessageBox.Show(
+                    "Вы уверены, что хотите удалить данные об этом учителя?",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    db.Teachers.Remove(teacher); // Удаляем из базы
+                    db.SaveChanges(); // Сохраняем
+                    MessageBox.Show("Данные о учителя удалены.");
+                    LoadTeachers(); // Обновляем таблицу
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите учителя для удаления.");
+            }
+        }
     }
 }

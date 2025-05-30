@@ -82,6 +82,7 @@
             buttonDelTeach.TabIndex = 3;
             buttonDelTeach.Text = "Удалить";
             buttonDelTeach.UseVisualStyleBackColor = true;
+            buttonDelTeach.Click += buttonDelTeach_Click;
             // 
             // buttonEditTeach
             // 
@@ -93,6 +94,7 @@
             buttonEditTeach.TabIndex = 2;
             buttonEditTeach.Text = "Редактировать";
             buttonEditTeach.UseVisualStyleBackColor = true;
+            buttonEditTeach.Click += buttonEditTeach_Click;
             // 
             // buttonAddTeach
             // 

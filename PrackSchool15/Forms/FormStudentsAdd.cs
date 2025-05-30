@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Entity.Core;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +30,7 @@ namespace PrackSchool15
 
         public FormStudentsAdd(Student selectedStudent)
         {
+            InitializeComponent();
             SelectedStudent = selectedStudent;
         }
 
@@ -40,13 +42,26 @@ namespace PrackSchool15
 
             // Загрузка классов в ComboBox
             LoadClasses();
+            if(SelectedStudent != null)
+            {
+                /* textBoxUsername.Text = SelectedStudent.
+                 textBoxPassword.Text = SelectedStudent.*/
+                textBoxAdress.Text = SelectedStudent.Address;
+                textBoxNumber.Text = SelectedStudent.PhoneNumber;
+                textBoxNameParents.Text = SelectedStudent.ParentName;
+                textBoxNumberParents.Text = SelectedStudent.ParentPhone;
+
+            }
+            comboBoxClass.DataSource = db.Classes.ToList();
+            comboBoxClass.DisplayMember = "ClassName"; // Отображаем название класса
+            comboBoxClass.ValueMember = "ClassId";   // Используем ID класса как значение
         }
 
         private void LoadClasses()
         {
-            comboBoxClass.DataSource = db.Classes.ToList();
+            /*comboBoxClass.DataSource = db.Classes.ToList();
             comboBoxClass.DisplayMember = "ClassName"; // Отображаем название класса
-            comboBoxClass.ValueMember = "ClassId";   // Используем ID класса как значение
+            comboBoxClass.ValueMember = "ClassId";   // Используем ID класса как значение*/
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

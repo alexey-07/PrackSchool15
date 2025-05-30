@@ -18,6 +18,7 @@ namespace PrackSchool15
         public FormLogin()
         {
             InitializeComponent();
+            textBoxPassword.PasswordChar = '*';
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -67,11 +68,11 @@ namespace PrackSchool15
                     FormMain adminForm = new FormMain();
                     adminForm.Show();
                     break;
-                /*case 2: //  Предположим, что 2 - это ID роли преподавателя
-                    FormTeacherMain teacherForm = new FormTeacherMain();
+                case 2: //  Предположим, что 2 - это ID роли преподавателя
+                    FormForTeacher teacherForm = new FormForTeacher();
                     teacherForm.Show();
                     break;
-                case 3: //  Предположим, что 3 - это ID роли студента
+                /*case 3: //  Предположим, что 3 - это ID роли студента
                     FormStudentMain studentForm = new FormStudentMain();
                     studentForm.Show();
                     break;*/

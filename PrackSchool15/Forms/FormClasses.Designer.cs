@@ -104,6 +104,7 @@
             buttonAddClass.TabIndex = 1;
             buttonAddClass.Text = "Добавить";
             buttonAddClass.UseVisualStyleBackColor = true;
+            buttonAddClass.Click += buttonAddClass_Click;
             // 
             // FormClasses
             // 

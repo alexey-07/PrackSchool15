@@ -17,38 +17,41 @@ namespace PrackSchool15
         private School15PrackContext db;
 
         public object textBoxNameTeacher { get; private set; }
+        public Teacher Teacher { get; }
 
         public FormTeacherAdd()
         {
             InitializeComponent();
         }
+
+        public FormTeacherAdd(Teacher teacher)
+        {
+            InitializeComponent();
+            Teacher = teacher;
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             db = new School15PrackContext();
             LoadSubjects();  // Загрузка предметов в ComboBox
             /* LoadQualifications(); // Загрузка квалификаций в ComboBox*/
-        }
-
-        private void LoadSubjects()
-        {
-            // Загрузка предметов в ComboBox
             comboBoxSubject.DataSource = db.Subjects.ToList();
             comboBoxSubject.DisplayMember = "SubjectName"; // Отображаем название предмета
             comboBoxSubject.ValueMember = "SubjectId";   // Используем ID предмета как значение
         }
 
-        /*private void LoadQualifications()
+        private void LoadSubjects()
         {
-            // Загрузка квалификаций в ComboBox
-            comboBoxQual.DataSource = db.Teachers.ToList();
-            comboBoxQual.DisplayMember = "QualificationName"; // Отображаем название квалификации
-            comboBoxQual.ValueMember = "QualificationId";   // Используем ID квалификации как значение
-        }*/
+            // Загрузка предметов в ComboBox
+         
+        }
+
+      
         private void buttonSave_Click(object sender, EventArgs e)
         {
-           /* try
-            {*/
+            try
+            {
                 // 1. Валидация данных
                 if (string.IsNullOrWhiteSpace(textBoxTeachUsername.Text) ||
                     comboBoxSubject.SelectedItem == null ||
@@ -90,8 +93,8 @@ namespace PrackSchool15
                 }
                 else
                 {
-                //  Если роль "Учитель" не существует, создайте ее (если необходимо)
-                var newRole = new Role { RoleName = "Учитель" };
+                    //  Если роль "Учитель" не существует, создайте ее (если необходимо)
+                    var newRole = new Role { RoleName = "Учитель" };
                     db.Roles.Add(newRole);
                     db.SaveChanges();
                     tacherRoleId = newRole.RoleId;
@@ -131,15 +134,15 @@ namespace PrackSchool15
 
                 MessageBox.Show("Преподаватель успешно добавлен!");
                 this.Close(); // Закрываем форму
-            
-            /*catch (EntityException ex)
+            }
+            catch (EntityException ex)
             {
                 MessageBox.Show($"Ошибка базы данных: {ex.InnerException?.Message ?? ex.Message}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
-            }*/
+            }
         }
     }
 }
