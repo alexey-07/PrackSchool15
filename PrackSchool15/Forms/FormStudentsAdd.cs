@@ -44,8 +44,11 @@ namespace PrackSchool15
             LoadClasses();
             if(SelectedStudent != null)
             {
-                /* textBoxUsername.Text = SelectedStudent.
-                 textBoxPassword.Text = SelectedStudent.*/
+                var user = db.Users.FirstOrDefault(u=>u.UserId == SelectedStudent.UserId);
+                this.Text = "Редактирование сотрудника";
+                textBoxUsername.Text = user.Username;
+                textBoxPassword.Text = user.Password; ;
+                dateTimePickerDate.Value = ((DateOnly)SelectedStudent.DateOfBirth).ToDateTime(new TimeOnly(0, 0, 0));
                 textBoxAdress.Text = SelectedStudent.Address;
                 textBoxNumber.Text = SelectedStudent.PhoneNumber;
                 textBoxNameParents.Text = SelectedStudent.ParentName;
@@ -66,72 +69,92 @@ namespace PrackSchool15
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            if(SelectedStudent==null)
             {
-                string username = textBoxUsername.Text.Trim();
-                string password = textBoxPassword.Text.Trim();
-
-                // 1. Получение или создание пользователя
-                var existingUser = db.Users.FirstOrDefault(u => u.Username == username);
-
-                if (existingUser != null)
+                try
                 {
-                    MessageBox.Show("Пользователь с таким логином уже существует!");
-                    return;
-                }
+                    string username = textBoxUsername.Text.Trim();
+                    string password = textBoxPassword.Text.Trim();
 
-                // 2. Получаем ID роли "Ученик" (или создаем, если ее нет)
-                // ВАЖНО: Укажите правильное название роли ("Ученик" или "Ученик")
-                var studentRole = db.Roles.FirstOrDefault(r => r.RoleName == "Ученик");
-                int studentRoleId;
+                    // 1. Получение или создание пользователя
+                    var existingUser = db.Users.FirstOrDefault(u => u.Username == username);
 
-                if (studentRole != null)
-                {
-                    studentRoleId = studentRole.RoleId; //  Используем существующую роль
-                }
-                else
-                {
-                    //  Если роль "Ученик" не существует, создайте ее (если необходимо)
-                    var newRole = new Role { RoleName = "Ученик" };
-                    db.Roles.Add(newRole);
+                    if (existingUser != null)
+                    {
+                        MessageBox.Show("Пользователь с таким логином уже существует!");
+                        return;
+                    }
+
+                    // 2. Получаем ID роли "Ученик" (или создаем, если ее нет)
+                    // ВАЖНО: Укажите правильное название роли ("Ученик" или "Ученик")
+                    var studentRole = db.Roles.FirstOrDefault(r => r.RoleName == "Ученик");
+                    int studentRoleId;
+
+                    if (studentRole != null)
+                    {
+                        studentRoleId = studentRole.RoleId; //  Используем существующую роль
+                    }
+                    else
+                    {
+                        //  Если роль "Ученик" не существует, создайте ее (если необходимо)
+                        var newRole = new Role { RoleName = "Ученик" };
+                        db.Roles.Add(newRole);
+                        db.SaveChanges();
+                        studentRoleId = newRole.RoleId;
+                    }
+
+                    // 3. Создаём нового пользователя
+                    var newUser = new User
+                    {
+                        Username = username,
+                        Password = password, // Хеширование пароля!
+                        RoleId = studentRoleId //  Присваиваем ID роли
+                    };
+
+                    db.Users.Add(newUser);
+                    db.SaveChanges(); // Сохраняем, чтобы у User появился ID
+
+                    // 4. Создаём студента, связанного с новым пользователем
+                    var newStudent = new Student
+                    {
+                        User = newUser, // Теперь это объект User
+                        DateOfBirth = DateOnly.FromDateTime(dateTimePickerDate.Value),
+                        Address = textBoxAdress.Text,
+                        ClassId = (int)comboBoxClass.SelectedValue,
+                        PhoneNumber = textBoxNumber.Text,
+                        AdmissionDate = DateOnly.FromDateTime(dateTimePickerDate.Value),
+                        ParentName = textBoxNameParents.Text,
+                        ParentPhone = textBoxNumberParents.Text,
+                    };
+                    db.Students.Add(newStudent);
                     db.SaveChanges();
-                    studentRoleId = newRole.RoleId;
+
+                    MessageBox.Show("Пользователь и студент успешно добавлены!");
+                    this.Close();
                 }
 
-                // 3. Создаём нового пользователя
-                var newUser = new User
+                catch (Exception ex)
                 {
-                    Username = username,
-                    Password = password, // Хеширование пароля!
-                    RoleId = studentRoleId //  Присваиваем ID роли
-                };
-
-                db.Users.Add(newUser);
-                db.SaveChanges(); // Сохраняем, чтобы у User появился ID
-
-                // 4. Создаём студента, связанного с новым пользователем
-                var newStudent = new Student
-                {
-                    User = newUser, // Теперь это объект User
-                    DateOfBirth = DateOnly.FromDateTime(dateTimePickerDate.Value),
-                    Address = textBoxAdress.Text,
-                    ClassId = (int)comboBoxClass.SelectedValue,
-                    PhoneNumber = textBoxNumber.Text,
-                    AdmissionDate = DateOnly.FromDateTime(dateTimePickerDate.Value),
-                    ParentName = textBoxNameParents.Text,
-                    ParentPhone = textBoxNumberParents.Text,
-                };
-                db.Students.Add(newStudent);
+                    MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}");
+                }
+            }
+            else
+            {
+                var user = db.Users.FirstOrDefault(u => u.UserId == SelectedStudent.UserId);
+                user.Username=textBoxUsername.Text;
+                user.Password = textBoxPassword.Text;
+                SelectedStudent.DateOfBirth = DateOnly.FromDateTime(dateTimePickerDate.Value);
+                SelectedStudent.Address = textBoxAdress.Text;
+                SelectedStudent.PhoneNumber = textBoxNumber.Text;
+                SelectedStudent.ParentName = textBoxNameParents.Text;
+                SelectedStudent.ParentPhone=textBoxNumberParents.Text;
                 db.SaveChanges();
 
-                MessageBox.Show("Пользователь и студент успешно добавлены!");
-                this.Close();
+                MessageBox.Show("Пользователь и студент успешно отредакрированны!");
+            
             }
 
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}");
-            }
+            
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

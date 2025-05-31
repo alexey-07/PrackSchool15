@@ -35,10 +35,29 @@ namespace PrackSchool15
             base.OnLoad(e);
             db = new School15PrackContext();
             LoadSubjects();  // Загрузка предметов в ComboBox
+          
+
             /* LoadQualifications(); // Загрузка квалификаций в ComboBox*/
             comboBoxSubject.DataSource = db.Subjects.ToList();
             comboBoxSubject.DisplayMember = "SubjectName"; // Отображаем название предмета
             comboBoxSubject.ValueMember = "SubjectId";   // Используем ID предмета как значение
+            if (Teacher != null)
+            {
+                var user = db.Users.FirstOrDefault(u => u.UserId == Teacher.UserId);
+                this.Text = "Редактирование сотрудника";
+                textBoxTeachUsername.Text = user.Username;
+                textBoxPasswordTeach.Text = user.Password; ;
+                dateTimePickerDateHare.Value = ((DateOnly)Teacher.HireDate).ToDateTime(new TimeOnly(0, 0, 0));
+                textBoxSalary.Text = Teacher.Salary.ToString();
+                textBoxQual.Text = Teacher.Qualification;
+                textBoxNameTeach.Text = Teacher.NameTeacher;
+                textBoxSurTeach.Text = Teacher.SurnameTeacher;
+                textBoxParTeach.Text = Teacher.PatronymicTeacher;
+                textBoxEduc.Text = Teacher.EducationTeacher;
+                textBoxAdressTeach.Text = Teacher.AdressTeacher;
+                textBoxNumberTeach.Text= Teacher.NumberTeacher;
+                textBoxEmailTeach.Text = Teacher.EmailTeacher;
+            }
         }
 
         private void LoadSubjects()
@@ -50,99 +69,124 @@ namespace PrackSchool15
       
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            try
+            if(Teacher==null)
             {
-                // 1. Валидация данных
-                if (string.IsNullOrWhiteSpace(textBoxTeachUsername.Text) ||
-                    comboBoxSubject.SelectedItem == null ||
-                    string.IsNullOrWhiteSpace(textBoxSalary.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxQual.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxNameTeach.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxSurTeach.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxParTeach.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxEduc.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxAdressTeach.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxNumberTeach.Text) ||
-                    string.IsNullOrWhiteSpace(textBoxEmailTeach.Text))
+                try
                 {
-                    MessageBox.Show("Пожалуйста, заполните все поля.");
-                    return;
-                }
+                    // 1. Валидация данных
+                    if (string.IsNullOrWhiteSpace(textBoxTeachUsername.Text) ||
+                        comboBoxSubject.SelectedItem == null ||
+                        string.IsNullOrWhiteSpace(textBoxSalary.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxQual.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxNameTeach.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxSurTeach.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxParTeach.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxEduc.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxAdressTeach.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxNumberTeach.Text) ||
+                        string.IsNullOrWhiteSpace(textBoxEmailTeach.Text))
+                    {
+                        MessageBox.Show("Пожалуйста, заполните все поля.");
+                        return;
+                    }
 
 
-                string username = textBoxTeachUsername.Text.Trim();
-                string password = textBoxPasswordTeach.Text.Trim();
+                    string username = textBoxTeachUsername.Text.Trim();
+                    string password = textBoxPasswordTeach.Text.Trim();
 
-                // 1. Получение или создание пользователя
-                var existingUser = db.Users.FirstOrDefault(u => u.Username == username);
+                    // 1. Получение или создание пользователя
+                    var existingUser = db.Users.FirstOrDefault(u => u.Username == username);
 
-                if (existingUser != null)
-                {
-                    MessageBox.Show("Пользователь с таким логином уже существует!");
-                    return;
-                }
+                    if (existingUser != null)
+                    {
+                        MessageBox.Show("Пользователь с таким логином уже существует!");
+                        return;
+                    }
 
-                // 2. Получаем ID роли "Ученик" (или создаем, если ее нет)
-                // ВАЖНО: Укажите правильное название роли ("Ученик" или "Ученик")
-                var teacherRole = db.Roles.FirstOrDefault(r => r.RoleName == "Учитель");
-                int tacherRoleId;
+                    // 2. Получаем ID роли "Ученик" (или создаем, если ее нет)
+                    // ВАЖНО: Укажите правильное название роли ("Ученик" или "Ученик")
+                    var teacherRole = db.Roles.FirstOrDefault(r => r.RoleName == "Учитель");
+                    int tacherRoleId;
 
-                if (teacherRole != null)
-                {
-                    tacherRoleId = teacherRole.RoleId; //  Используем существующую роль
-                }
-                else
-                {
-                    //  Если роль "Учитель" не существует, создайте ее (если необходимо)
-                    var newRole = new Role { RoleName = "Учитель" };
-                    db.Roles.Add(newRole);
+                    if (teacherRole != null)
+                    {
+                        tacherRoleId = teacherRole.RoleId; //  Используем существующую роль
+                    }
+                    else
+                    {
+                        //  Если роль "Учитель" не существует, создайте ее (если необходимо)
+                        var newRole = new Role { RoleName = "Учитель" };
+                        db.Roles.Add(newRole);
+                        db.SaveChanges();
+                        tacherRoleId = newRole.RoleId;
+                    }
+
+                    // 3. Создаём нового пользователя
+                    var newUser = new User
+                    {
+                        Username = username,
+                        Password = password, // Хеширование пароля!
+                        RoleId = tacherRoleId //  Присваиваем ID роли
+                    };
+                    db.Users.Add(newUser);
+                    db.SaveChanges(); // Сохраняем, чтобы у User появился ID
+
+                    // 4. Создание нового преподавателя
+                    var newTeacher = new Teacher
+                    {
+
+                        User = newUser, // Теперь это объект User
+                        SubjectId = (int)comboBoxSubject.SelectedValue, // Получаем ID предмета
+                        HireDate = DateOnly.FromDateTime(dateTimePickerDateHare.Value),
+                        Salary = decimal.Parse(textBoxSalary.Text), // Преобразуем зарплату в decimal
+                        Qualification = textBoxQual.Text, // Получаем ID квалификации
+                        NameTeacher = textBoxNameTeach.Text,
+                        SurnameTeacher = textBoxSurTeach.Text,
+                        PatronymicTeacher = textBoxParTeach.Text,
+                        EducationTeacher = textBoxEduc.Text,
+                        AdressTeacher = textBoxAdressTeach.Text,
+                        NumberTeacher = textBoxNumberTeach.Text,
+                        EmailTeacher = textBoxEmailTeach.Text
+
+                    };
+
+                    db.Teachers.Add(newTeacher);
                     db.SaveChanges();
-                    tacherRoleId = newRole.RoleId;
+
+                    MessageBox.Show("Преподаватель успешно добавлен!");
+                    this.Close(); // Закрываем форму
                 }
-
-                // 3. Создаём нового пользователя
-                var newUser = new User
+                catch (EntityException ex)
                 {
-                    Username = username,
-                    Password = password, // Хеширование пароля!
-                    RoleId = tacherRoleId //  Присваиваем ID роли
-                };
-                db.Users.Add(newUser);
-                db.SaveChanges(); // Сохраняем, чтобы у User появился ID
-
-                // 4. Создание нового преподавателя
-                var newTeacher = new Teacher
+                    MessageBox.Show($"Ошибка базы данных: {ex.InnerException?.Message ?? ex.Message}");
+                }
+                catch (Exception ex)
                 {
-
-                    User = newUser, // Теперь это объект User
-                    SubjectId = (int)comboBoxSubject.SelectedValue, // Получаем ID предмета
-                    HireDate = DateOnly.FromDateTime(dateTimePickerDateHare.Value),
-                    Salary = decimal.Parse(textBoxSalary.Text), // Преобразуем зарплату в decimal
-                    Qualification = textBoxQual.Text, // Получаем ID квалификации
-                    NameTeacher = textBoxNameTeach.Text,
-                    SurnameTeacher = textBoxSurTeach.Text,
-                    PatronymicTeacher = textBoxParTeach.Text,
-                    EducationTeacher = textBoxEduc.Text,
-                    AdressTeacher = textBoxAdressTeach.Text,
-                    NumberTeacher = textBoxNumberTeach.Text,
-                    EmailTeacher = textBoxEmailTeach.Text
-
-                };
-
-                db.Teachers.Add(newTeacher);
+                    MessageBox.Show($"Ошибка: {ex.Message}");
+                }
+            }
+            else
+            {
+                var user = db.Users.FirstOrDefault(u => u.UserId == Teacher.UserId);
+                user.Username = textBoxTeachUsername.Text;
+                user.Password = textBoxPasswordTeach.Text;
+                Teacher.HireDate = DateOnly.FromDateTime(dateTimePickerDateHare.Value);
+                Teacher.Salary = Decimal.Parse(textBoxSalary.Text);
+                Teacher.Qualification = textBoxQual.Text;
+                Teacher.NameTeacher = textBoxNameTeach.Text;
+                Teacher.SurnameTeacher = textBoxSurTeach.Text;
+                Teacher.PatronymicTeacher = textBoxParTeach.Text;
+                Teacher.EducationTeacher = textBoxEduc.Text;
+                Teacher.AdressTeacher = textBoxAdressTeach.Text;
+                Teacher.NumberTeacher= textBoxNumberTeach.Text;
+                Teacher.EmailTeacher = textBoxEmailTeach.Text;
                 db.SaveChanges();
 
-                MessageBox.Show("Преподаватель успешно добавлен!");
-                this.Close(); // Закрываем форму
+                MessageBox.Show("Пользователь и учитель успешно отредакрированны!");
+
             }
-            catch (EntityException ex)
-            {
-                MessageBox.Show($"Ошибка базы данных: {ex.InnerException?.Message ?? ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка: {ex.Message}");
-            }
+
+
         }
     }
 }

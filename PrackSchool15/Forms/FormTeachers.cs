@@ -85,7 +85,7 @@ namespace PrackSchool15
         {
             FormTeacherAdd addForm = new FormTeacherAdd(); // Создаем экземпляр FormTeacherAdd
             addForm.ShowDialog(); // Открываем форму как модальное окно
-
+            LoadTeachers();
         }
 
         private void buttonEditTeach_Click(object sender, EventArgs e)

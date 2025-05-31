@@ -262,6 +262,7 @@
             // 
             // buttonCancel
             // 
+            buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonCancel.Location = new Point(64, 6);
             buttonCancel.Name = "buttonCancel";
@@ -274,6 +275,7 @@
             // 
             // buttonSave
             // 
+            buttonSave.DialogResult = DialogResult.OK;
             buttonSave.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonSave.Location = new Point(369, 6);
             buttonSave.Name = "buttonSave";

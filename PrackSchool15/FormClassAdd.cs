@@ -24,13 +24,21 @@ namespace PrackSchool15
         {
             base.OnLoad(e);
             db = new School15PrackContext();
-            /*  //  LoadTeachers();  // Загружайте преподавателей только, если это необходимо (если они выбираются из списка)
+           
               comboBoxNameClass.DataSource = db.Classes.ToList();
               comboBoxNameClass.DisplayMember = "ClassName"; // Отображаем название предмета
-              comboBoxNameClass.ValueMember = "ClasstId";   // Используем ID предмета как значение
-          }*/
+              comboBoxNameClass.ValueMember = "ClassId";   // Используем ID предмета как значение
+          
+            comboBoxFIOTeach.DataSource=db.Teachers
+                .Select(u=>new
+                {
+                    Name = u.NameTeacher +" "  + u.SurnameTeacher +" "+ u.PatronymicTeacher, u.TeacherId
+                })
+                .ToList();
+            comboBoxFIOTeach.DisplayMember = "Name";
+            comboBoxFIOTeach.ValueMember = "TeacherId";
 
-            
+
         }
         private void buttonSave_Click(object sender, EventArgs e)
         {

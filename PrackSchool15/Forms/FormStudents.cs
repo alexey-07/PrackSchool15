@@ -103,44 +103,7 @@ namespace PrackSchool15
                 LoadStudent(); // Обновляем данные в DataGridView
             }
         }
-        /*private Student GetSelectedStudent() //  Вместо GetSelectedChild()
-        {
-            //  Если DataGridView привязан напрямую:
-            *//*if (dataGridViewStud.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dataGridViewStud.SelectedRows[0];
-                return (Student)selectedRow.DataBoundItem; //  Получаем объект Student
-            }*//*
-            if (dataGridViewStud.SelectedRows.Count > 0)
-            {
-                return (Student)dataGridViewStud.SelectedRows[0].DataBoundItem;
-            }
-            return null;
-
-
-        }*/
-       /* private Student GetSelectedStudent()
-        {
-            if (dataGridViewStud.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dataGridViewStud.SelectedRows[0];
-                if (selectedRow.DataBoundItem is Student student)  // Безопасное приведение
-                {
-                    return student;
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка: Не удалось получить студента из DataGridView.  DataBoundItem имеет неверный тип.");
-                    return null;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите студента.");
-                return null;
-            }
-        }
-*/
+        
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             /*Student selectedStudent = GetSelectedStudent();*/
@@ -155,27 +118,14 @@ namespace PrackSchool15
                 FormStudentsAdd editForm = new FormStudentsAdd(student);
                 if (editForm.ShowDialog() == DialogResult.OK)  //  Проверяем, что форма редактирования была закрыта успешно
                 {
-                    LoadStudent(); // Обновляем список студентов
+
+                    MessageBox.Show("Карась");
                 }
+               
             }
+    
         }
-        /* private void buttonEdit_Click(object sender, EventArgs e)
-         {
-             Student selectedStudent = GetSelectedStudent();
-
-             if (selectedStudent != null)
-             {
-                 FormStudentsAdd editForm = new FormStudentsAdd(selectedStudent); // Передаем выбранного студента в форму редактирования
-                 editForm.ShowDialog(); // Открываем форму как модальное окно
-
-                 // После закрытия формы редактирования обновляем список студентов
-                 LoadStudent();
-             }
-             else
-             {
-                 MessageBox.Show("Пожалуйста, выберите студента для редактирования.");
-             }
-         }*/
+      
         private void buttonDel_Click(object sender, EventArgs e)
         {
             int id = (int)dataGridViewStud.SelectedRows[0].Cells["studentid"].Value;

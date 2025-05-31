@@ -30,4 +30,6 @@ public partial class Student
     public virtual ICollection<Grade> Grades { get; set; } = new List<Grade>();
 
     public virtual User User { get; set; } = null!;
+  /*  public string Username { get; internal set; }
+    public string Password { get; internal set; }*/
 }

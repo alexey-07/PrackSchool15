@@ -19,6 +19,27 @@ namespace PrackSchool15
         {
             InitializeComponent();
         }
+
+        private void UpdateTable()
+        {
+            dataGridViewClass.DataSource = db.Classes
+                .Select(u => new { u.ClassId, u.ClassName, u.Teacher.NameTeacher })
+              
+                .ToList();
+            var classesWithGroup = db.Classes.Local
+              .Select(c => new
+              {
+                  Класс = c.ClassId, // Получаем ClassId из таблицы Classes
+                  Название = c.ClassName, // Достаем ClassName из таблицы Classes
+                  Имя = c.Teacher != null ? c.Teacher.NameTeacher : null, // Достаем Name из Teacher
+                  Фамилия = c.Teacher != null ? c.Teacher.SurnameTeacher : null, // Достаем Surname из Teacher
+                  Отечество = c.Teacher != null ? c.Teacher.PatronymicTeacher : null // Достаем Patronymic из Teacher
+
+
+              }).ToList();
+
+            dataGridViewClass.DataSource = classesWithGroup;
+        }
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -44,25 +65,49 @@ namespace PrackSchool15
 
         private void buttonAddClass_Click(object sender, EventArgs e)
         {
-            FormClassAdd classFormAdd = new FormClassAdd();
-            classFormAdd.ShowDialog();
-        }
-        /*protected override void OnLoad(EventArgs e)
-{
-   base.OnLoad(e);
-   this.db = new School15PrackContext();
-   this.db.Classes.Load();
-   this.dataGridViewClass.DataSource = this.db.Classes.Local.OrderBy(o => o.ClassId).ToList();
-   dataGridViewClass.Columns["Classid"].Visible = false;
-   dataGridViewClass.Columns["Lessons"].Visible = false;
-   dataGridViewClass.Columns["Students"].Visible = false;
-   dataGridViewClass.Columns["Teacher"].Visible = false;
+            FormClassAdd form = new FormClassAdd();
 
-}
-private void LoadGrops()
-{
-   this.db.Classes.Load();
-   this.dataGridViewClass.DataSource = this.db.Classes.Local.OrderBy(o => o.ClassId).ToList();
-}*/
+            DialogResult result = form.ShowDialog();
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            Class classy = new Class();
+
+            try
+            {
+
+                /*if (String.IsNullOrEmpty(frtextBoxClassNumber.Text) ||
+                    String.IsNullOrEmpty(form.textBoxAdress.Text))
+                {
+                    throw new Exception("Название и адрес здания обязательно должны быть введены");
+                }*/
+
+                /* if (form.checkBoxCancel.Checked && DateOnly.FromDateTime(form.dateTimePickerDateOfCancel.Value) < DateOnly.FromDateTime(form.dateTimePickerDateOfRegistration.Value))
+                 {
+                     throw new Exception("Дата закрытия организации не может быть меньше даты регистрации");
+                 }*/
+
+                classy = new Class
+                {
+                    ClassName = form.comboBoxNameClass.SelectedText,
+                    TeacherId=(int)form.comboBoxFIOTeach.SelectedValue,
+
+                   
+                };
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+        }
+
     }
 }

@@ -30,11 +30,6 @@
         {
             panelFill = new Panel();
             comboBoxNameClass = new ComboBox();
-            textBoxParTeach = new TextBox();
-            labelParTeacher = new Label();
-            textBoxSurTeach = new TextBox();
-            labelSurTeacher = new Label();
-            textBoxNameTeach = new TextBox();
             labelNameTeacher = new Label();
             labelNameClass = new Label();
             textBoxClassNumber = new TextBox();
@@ -43,6 +38,7 @@
             panelBottom = new Panel();
             button1 = new Button();
             buttonSave = new Button();
+            comboBoxFIOTeach = new ComboBox();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClassAdd).BeginInit();
             panelBottom.SuspendLayout();
@@ -50,12 +46,8 @@
             // 
             // panelFill
             // 
+            panelFill.Controls.Add(comboBoxFIOTeach);
             panelFill.Controls.Add(comboBoxNameClass);
-            panelFill.Controls.Add(textBoxParTeach);
-            panelFill.Controls.Add(labelParTeacher);
-            panelFill.Controls.Add(textBoxSurTeach);
-            panelFill.Controls.Add(labelSurTeacher);
-            panelFill.Controls.Add(textBoxNameTeach);
             panelFill.Controls.Add(labelNameTeacher);
             panelFill.Controls.Add(labelNameClass);
             panelFill.Controls.Add(textBoxClassNumber);
@@ -77,50 +69,6 @@
             comboBoxNameClass.Name = "comboBoxNameClass";
             comboBoxNameClass.Size = new Size(135, 29);
             comboBoxNameClass.TabIndex = 12;
-            // 
-            // textBoxParTeach
-            // 
-            textBoxParTeach.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxParTeach.Location = new Point(32, 355);
-            textBoxParTeach.Name = "textBoxParTeach";
-            textBoxParTeach.Size = new Size(230, 29);
-            textBoxParTeach.TabIndex = 11;
-            // 
-            // labelParTeacher
-            // 
-            labelParTeacher.AutoSize = true;
-            labelParTeacher.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelParTeacher.Location = new Point(32, 327);
-            labelParTeacher.Name = "labelParTeacher";
-            labelParTeacher.Size = new Size(167, 25);
-            labelParTeacher.TabIndex = 10;
-            labelParTeacher.Text = "Отчество учителя";
-            // 
-            // textBoxSurTeach
-            // 
-            textBoxSurTeach.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxSurTeach.Location = new Point(32, 275);
-            textBoxSurTeach.Name = "textBoxSurTeach";
-            textBoxSurTeach.Size = new Size(230, 29);
-            textBoxSurTeach.TabIndex = 9;
-            // 
-            // labelSurTeacher
-            // 
-            labelSurTeacher.AutoSize = true;
-            labelSurTeacher.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelSurTeacher.Location = new Point(32, 247);
-            labelSurTeacher.Name = "labelSurTeacher";
-            labelSurTeacher.Size = new Size(165, 25);
-            labelSurTeacher.TabIndex = 8;
-            labelSurTeacher.Text = "Фамилия учителя";
-            // 
-            // textBoxNameTeach
-            // 
-            textBoxNameTeach.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxNameTeach.Location = new Point(32, 195);
-            textBoxNameTeach.Name = "textBoxNameTeach";
-            textBoxNameTeach.Size = new Size(230, 29);
-            textBoxNameTeach.TabIndex = 7;
             // 
             // labelNameTeacher
             // 
@@ -204,6 +152,15 @@
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
             // 
+            // comboBoxFIOTeach
+            // 
+            comboBoxFIOTeach.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            comboBoxFIOTeach.FormattingEnabled = true;
+            comboBoxFIOTeach.Location = new Point(32, 195);
+            comboBoxFIOTeach.Name = "comboBoxFIOTeach";
+            comboBoxFIOTeach.Size = new Size(238, 29);
+            comboBoxFIOTeach.TabIndex = 13;
+            // 
             // FormClassAdd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -224,17 +181,13 @@
         private Panel panelFill;
         private DataGridView dataGridViewClassAdd;
         private Panel panelBottom;
-        private TextBox textBoxClassNumber;
         private Label labelNumberClass;
         private Label labelNameClass;
-        private ComboBox comboBoxNameClass;
-        private TextBox textBoxParTeach;
-        private Label labelParTeacher;
-        private TextBox textBoxSurTeach;
-        private Label labelSurTeacher;
-        private TextBox textBoxNameTeach;
         private Label labelNameTeacher;
         private Button button1;
         private Button buttonSave;
+        public TextBox textBoxClassNumber;
+        public ComboBox comboBoxNameClass;
+        public ComboBox comboBoxFIOTeach;
     }
 }
