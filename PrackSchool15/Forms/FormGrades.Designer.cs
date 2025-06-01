@@ -57,6 +57,7 @@
             dataGridViewGrade.Dock = DockStyle.Fill;
             dataGridViewGrade.Location = new Point(10, 67);
             dataGridViewGrade.Name = "dataGridViewGrade";
+            dataGridViewGrade.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewGrade.Size = new Size(892, 398);
             dataGridViewGrade.TabIndex = 1;
             // 
@@ -82,6 +83,7 @@
             buttonDelGrade.TabIndex = 4;
             buttonDelGrade.Text = "Удалить";
             buttonDelGrade.UseVisualStyleBackColor = true;
+            buttonDelGrade.Click += buttonDelGrade_Click;
             // 
             // buttonEditGrade
             // 
@@ -93,6 +95,7 @@
             buttonEditGrade.TabIndex = 3;
             buttonEditGrade.Text = "Редактировать";
             buttonEditGrade.UseVisualStyleBackColor = true;
+            buttonEditGrade.Click += buttonEditGrade_Click;
             // 
             // buttonAddGrade
             // 
@@ -104,6 +107,7 @@
             buttonAddGrade.TabIndex = 2;
             buttonAddGrade.Text = "Добавить";
             buttonAddGrade.UseVisualStyleBackColor = true;
+            buttonAddGrade.Click += buttonAddGrade_Click;
             // 
             // FormGrades
             // 
