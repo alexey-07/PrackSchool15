@@ -348,7 +348,7 @@
             // 
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonCancel.Location = new Point(10, 6);
+            buttonCancel.Location = new Point(235, 6);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Padding = new Padding(5);
             buttonCancel.Size = new Size(216, 41);
@@ -360,7 +360,7 @@
             // 
             buttonSave.DialogResult = DialogResult.OK;
             buttonSave.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonSave.Location = new Point(235, 6);
+            buttonSave.Location = new Point(10, 6);
             buttonSave.Name = "buttonSave";
             buttonSave.Padding = new Padding(5);
             buttonSave.Size = new Size(216, 41);

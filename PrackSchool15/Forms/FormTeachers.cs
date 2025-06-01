@@ -226,6 +226,7 @@ namespace PrackSchool15
                     var user = db.Users.FirstOrDefault(u => u.UserId == editForm.Teacher.UserId);
                     user.Username = editForm.textBoxTeachUsername.Text;
                     user.Password = editForm.textBoxPasswordTeach.Text;
+                    teacher.SubjectId= (int)editForm.comboBoxSubject.SelectedValue;
                     teacher.HireDate = DateOnly.FromDateTime(editForm.dateTimePickerDateHare.Value);
                     teacher.Salary = Decimal.Parse(editForm.textBoxSalary.Text);
                     teacher.Qualification = editForm.textBoxQual.Text;

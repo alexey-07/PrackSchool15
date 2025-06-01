@@ -139,7 +139,7 @@ namespace PrackSchool15
 
                     dataGridViewClass.DataSource = classesWithGroup;
                     db.SaveChanges();
-                    MessageBox.Show("q");
+                    MessageBox.Show("Данные о классе изменены");
                 }
             }
         }

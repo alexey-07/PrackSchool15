@@ -184,6 +184,7 @@ namespace PrackSchool15
                     var user = db.Users.FirstOrDefault(u => u.UserId == editForm.SelectedStudent.UserId);
                     user.Username = editForm.textBoxUsername.Text;
                     user.Password = editForm.textBoxPassword.Text;
+                    student.ClassId= (int)editForm.comboBoxClass.SelectedValue;
                     student.DateOfBirth = DateOnly.FromDateTime(editForm.dateTimePickerDate.Value);
                     student.Address = editForm.textBoxAdress.Text;
                     student.PhoneNumber = editForm.textBoxNumber.Text;

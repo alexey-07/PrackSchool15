@@ -82,7 +82,7 @@
             panelFill.Location = new Point(0, 0);
             panelFill.Name = "panelFill";
             panelFill.Padding = new Padding(10);
-            panelFill.Size = new Size(666, 608);
+            panelFill.Size = new Size(523, 603);
             panelFill.TabIndex = 0;
             // 
             // labelPassword
@@ -91,9 +91,9 @@
             labelPassword.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelPassword.Location = new Point(29, 81);
             labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(70, 20);
+            labelPassword.Size = new Size(62, 20);
             labelPassword.TabIndex = 58;
-            labelPassword.Text = "Password";
+            labelPassword.Text = "Пароль";
             // 
             // textBoxPassword
             // 
@@ -146,9 +146,9 @@
             labelUsername.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelUsername.Location = new Point(29, 22);
             labelUsername.Name = "labelUsername";
-            labelUsername.Size = new Size(75, 20);
+            labelUsername.Size = new Size(87, 20);
             labelUsername.TabIndex = 36;
-            labelUsername.Text = "Username";
+            labelUsername.Text = "Имя юзера";
             // 
             // labelNameParents
             // 
@@ -246,7 +246,7 @@
             dataGridViewAddStud.Dock = DockStyle.Fill;
             dataGridViewAddStud.Location = new Point(10, 10);
             dataGridViewAddStud.Name = "dataGridViewAddStud";
-            dataGridViewAddStud.Size = new Size(646, 538);
+            dataGridViewAddStud.Size = new Size(503, 533);
             dataGridViewAddStud.TabIndex = 1;
             // 
             // panelBottom
@@ -254,17 +254,17 @@
             panelBottom.Controls.Add(buttonCancel);
             panelBottom.Controls.Add(buttonSave);
             panelBottom.Dock = DockStyle.Bottom;
-            panelBottom.Location = new Point(10, 548);
+            panelBottom.Location = new Point(10, 543);
             panelBottom.Name = "panelBottom";
             panelBottom.Padding = new Padding(10);
-            panelBottom.Size = new Size(646, 50);
+            panelBottom.Size = new Size(503, 50);
             panelBottom.TabIndex = 0;
             // 
             // buttonCancel
             // 
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonCancel.Location = new Point(64, 6);
+            buttonCancel.Location = new Point(267, 6);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Padding = new Padding(5);
             buttonCancel.Size = new Size(216, 41);
@@ -277,7 +277,7 @@
             // 
             buttonSave.DialogResult = DialogResult.OK;
             buttonSave.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonSave.Location = new Point(369, 6);
+            buttonSave.Location = new Point(19, 6);
             buttonSave.Name = "buttonSave";
             buttonSave.Padding = new Padding(5);
             buttonSave.Size = new Size(216, 41);
@@ -291,7 +291,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(666, 608);
+            ClientSize = new Size(523, 603);
             Controls.Add(panelFill);
             Name = "FormStudentsAdd";
             StartPosition = FormStartPosition.CenterScreen;

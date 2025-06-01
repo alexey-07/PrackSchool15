@@ -119,7 +119,7 @@
             // 
             button1.DialogResult = DialogResult.Cancel;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            button1.Location = new Point(3, 6);
+            button1.Location = new Point(185, 6);
             button1.Name = "button1";
             button1.Padding = new Padding(10);
             button1.Size = new Size(168, 47);
@@ -131,7 +131,7 @@
             // 
             buttonSave.DialogResult = DialogResult.OK;
             buttonSave.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonSave.Location = new Point(185, 6);
+            buttonSave.Location = new Point(3, 6);
             buttonSave.Name = "buttonSave";
             buttonSave.Padding = new Padding(10);
             buttonSave.Size = new Size(168, 47);
