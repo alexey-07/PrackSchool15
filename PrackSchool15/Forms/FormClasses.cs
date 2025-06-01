@@ -24,7 +24,7 @@ namespace PrackSchool15
         {
             dataGridViewClass.DataSource = db.Classes
                 .Select(u => new { u.ClassId, u.ClassName, u.Teacher.NameTeacher })
-              
+
                 .ToList();
             var classesWithGroup = db.Classes.Local
               .Select(c => new
@@ -92,10 +92,9 @@ namespace PrackSchool15
 
                 classy = new Class
                 {
-                    ClassName = form.comboBoxNameClass.SelectedText,
-                    TeacherId=(int)form.comboBoxFIOTeach.SelectedValue,
+                    ClassName = form.textBoxNameClass.Text,
+                    TeacherId = (int)form.comboBoxFIOTeach.SelectedValue,
 
-                   
                 };
 
             }
@@ -107,7 +106,69 @@ namespace PrackSchool15
                     MessageBoxIcon.Error);
                 return;
             }
+            db.Classes.Add(classy);
+            db.SaveChanges();
+
+            UpdateTable();
         }
 
+        private void buttonEditClass_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewClass.SelectedRows.Count == 0)
+                return;
+            int id = (int)dataGridViewClass.SelectedRows[0].Cells["Класс"].Value;
+            var classe = db.Classes.FirstOrDefault(u => u.ClassId == id);
+
+            if (classe != null)
+            {
+                // Открываем форму редактирования, передаем выбранного студента
+                FormClassAdd editForm = new FormClassAdd(classe);
+                if (editForm.ShowDialog() == DialogResult.OK)  //  Проверяем, что форма редактирования была закрыта успешно
+                {
+                    var classesWithGroup = db.Classes.Local
+               .Select(c => new
+               {
+                   Класс = c.ClassId, // Получаем ClassId из таблицы Classes
+                   Название = c.ClassName, // Достаем ClassName из таблицы Classes
+                   Имя = c.Teacher != null ? c.Teacher.NameTeacher : null, // Достаем Name из Teacher
+                   Фамилия = c.Teacher != null ? c.Teacher.SurnameTeacher : null, // Достаем Surname из Teacher
+                   Отечество = c.Teacher != null ? c.Teacher.PatronymicTeacher : null // Достаем Patronymic из Teacher
+
+
+               }).ToList();
+
+                    dataGridViewClass.DataSource = classesWithGroup;
+                    db.SaveChanges();
+                    MessageBox.Show("q");
+                }
+            }
+        }
+
+        private void buttonDelClass_Click(object sender, EventArgs e)
+        {
+            int id = (int)dataGridViewClass.SelectedRows[0].Cells["Класс"].Value;
+            var classe = db.Classes.FirstOrDefault(u => u.ClassId == id);
+
+            if (classe != null)
+            {
+                var confirmResult = MessageBox.Show(
+                    "Вы уверены, что хотите удалить данные об этом классе?",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    db.Classes.Remove(classe); // Удаляем из базы
+                    db.SaveChanges(); // Сохраняем
+                    MessageBox.Show("Данные о классе удалены.");
+                    UpdateTable(); // Обновляем таблицу
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите учителя для удаления.");
+            }
+        }
     }
 }

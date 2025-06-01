@@ -75,7 +75,7 @@ public partial class School15PrackContext : DbContext
             entity.HasIndex(e => e.ClassName, "classes_class_name_key").IsUnique();
 
             entity.Property(e => e.ClassId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('classes_id_seq'::regclass)")
                 .HasColumnName("class_id");
             entity.Property(e => e.ClassName)
                 .HasMaxLength(10)
@@ -120,7 +120,7 @@ public partial class School15PrackContext : DbContext
             entity.ToTable("lessons");
 
             entity.Property(e => e.LessonId)
-                .ValueGeneratedNever()
+                .HasDefaultValueSql("nextval('lessons_id_seq'::regclass)")
                 .HasColumnName("lesson_id");
             entity.Property(e => e.ClassId).HasColumnName("class_id");
             entity.Property(e => e.EndTime).HasColumnName("end_time");

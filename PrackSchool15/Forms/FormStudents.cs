@@ -81,36 +81,99 @@ namespace PrackSchool15
                 if (result == DialogResult.Cancel) return;
 
 
-                //  Создаем нового студента
-                Student newStudent = new Student
+
+                try
                 {
-                    //  Получаем или создаем пользователя
+                    string username = formAdd.textBoxUsername.Text.Trim();
+                    string password = formAdd.textBoxPassword.Text.Trim();
 
-                    DateOfBirth = DateOnly.FromDateTime(formAdd.dateTimePickerDate.Value),
-                    Address = formAdd.textBoxAdress.Text,
-                    PhoneNumber = formAdd.textBoxNumber.Text,
-                    AdmissionDate = DateOnly.FromDateTime(formAdd.dateTimePickerAdm.Value),
-                    ParentName = formAdd.textBoxNameParents.Text,
-                    ParentPhone = formAdd.textBoxNumberParents.Text
+                    // 1. Получение или создание пользователя
+                    var existingUser = db.Users.FirstOrDefault(u => u.Username == username);
 
-                };
+                    if (existingUser != null)
+                    {
+                        MessageBox.Show("Пользователь с таким логином уже существует!");
+                        return;
+                    }
 
-                // Добавляем в базу
-                db.Students.Add(newStudent); // Исправлено на Students
-                db.SaveChanges();
+                    // 2. Получаем ID роли "Ученик" (или создаем, если ее нет)
+                    // ВАЖНО: Укажите правильное название роли ("Ученик" или "Ученик")
+                    var studentRole = db.Roles.FirstOrDefault(r => r.RoleName == "Ученик");
+                    int studentRoleId;
 
-                MessageBox.Show("Новые данные о студенте добавлены");
-                LoadStudent(); // Обновляем данные в DataGridView
+                    if (studentRole != null)
+                    {
+                        studentRoleId = studentRole.RoleId; //  Используем существующую роль
+                    }
+                    else
+                    {
+                        //  Если роль "Ученик" не существует, создайте ее (если необходимо)
+                        var newRole = new Role { RoleName = "Ученик" };
+                        db.Roles.Add(newRole);
+                        db.SaveChanges();
+                        studentRoleId = newRole.RoleId;
+                    }
+                    var newUser = new User
+                    {
+                        Username = username,
+                        Password = password, // Рекомендуется хешировать
+                        RoleId = studentRoleId
+                    };
+
+                    db.Users.Add(newUser);
+                    db.SaveChanges();
+
+                    var newStudent = new Student
+                    {
+                        UserId = newUser.UserId, // Устанавливаем внешний ключ напрямую
+                        DateOfBirth = DateOnly.FromDateTime(formAdd.dateTimePickerDate.Value),
+                        Address = formAdd.textBoxAdress.Text,
+                        ClassId = (int)formAdd.comboBoxClass.SelectedValue,
+                        PhoneNumber = formAdd.textBoxNumber.Text,
+                        AdmissionDate = DateOnly.FromDateTime(formAdd.dateTimePickerAdm.Value), // Используем Adm date picker
+                        ParentName = formAdd.textBoxNameParents.Text,
+                        ParentPhone = formAdd.textBoxNumberParents.Text,
+                    };
+
+                    db.Students.Add(newStudent);
+                    db.SaveChanges();
+                    MessageBox.Show("Пользователь и студент успешно добавлены!");
+       /*             this.Close();*/
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}");
+                }
             }
+
+            MessageBox.Show("Новые данные о студенте добавлены");
+            var studentWithClass = db.Students.Local
+            .Select(c => new
+            {
+                c.StudentId,
+                Юзер = c.User != null ? c.User.Username : null,
+                Класс = c.ClassId,
+                Название = c.Class != null ? c.Class.ClassName : "—",
+                ДатаРождения = c.DateOfBirth,
+                Адрес = c.Address,
+                Телефон = c.PhoneNumber,
+                ДатаЗачисления = c.AdmissionDate,
+                Имя_Родителя = c.ParentName,
+                ТелефонРодителей = c.ParentPhone
+            }).ToList();
+
+            dataGridViewStud.DataSource = studentWithClass; ;
         }
-        
+
+
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             /*Student selectedStudent = GetSelectedStudent();*/
-            if(dataGridViewStud.SelectedRows.Count == 0)
+            if (dataGridViewStud.SelectedRows.Count == 0)
                 return;
             int id = (int)dataGridViewStud.SelectedRows[0].Cells["studentid"].Value;
-            var student=db.Students.FirstOrDefault(u=>u.StudentId == id);
+            var student = db.Students.FirstOrDefault(u => u.StudentId == id);
 
             if (student != null)
             {
@@ -118,14 +181,39 @@ namespace PrackSchool15
                 FormStudentsAdd editForm = new FormStudentsAdd(student);
                 if (editForm.ShowDialog() == DialogResult.OK)  //  Проверяем, что форма редактирования была закрыта успешно
                 {
+                    var user = db.Users.FirstOrDefault(u => u.UserId == editForm.SelectedStudent.UserId);
+                    user.Username = editForm.textBoxUsername.Text;
+                    user.Password = editForm.textBoxPassword.Text;
+                    student.DateOfBirth = DateOnly.FromDateTime(editForm.dateTimePickerDate.Value);
+                    student.Address = editForm.textBoxAdress.Text;
+                    student.PhoneNumber = editForm.textBoxNumber.Text;
+                    student.ParentName = editForm.textBoxNameParents.Text;
+                    student.ParentPhone = editForm.textBoxNumberParents.Text;
+                    db.SaveChanges();
 
-                    MessageBox.Show("Карась");
-                }
-               
+                    MessageBox.Show("Пользователь и студент успешно отредакрированны!");
+                    var studentWithClass = db.Students.Local
+                    .Select(c => new
+                    {
+                        c.StudentId,
+                        Юзер = c.User != null ? c.User.Username : null,
+                        Класс = c.ClassId,
+                        Название = c.Class != null ? c.Class.ClassName : "—",
+                        ДатаРождения = c.DateOfBirth,
+                        Адрес = c.Address,
+                        Телефон = c.PhoneNumber,
+                        ДатаЗачисления = c.AdmissionDate,
+                        Имя_Родителя = c.ParentName,
+                        ТелефонРодителей = c.ParentPhone
+                    }).ToList();
+
+                            dataGridViewStud.DataSource = studentWithClass; ;
+                        }
+
             }
-    
+
         }
-      
+
         private void buttonDel_Click(object sender, EventArgs e)
         {
             int id = (int)dataGridViewStud.SelectedRows[0].Cells["studentid"].Value;
@@ -141,6 +229,8 @@ namespace PrackSchool15
 
                 if (confirmResult == DialogResult.Yes)
                 {
+                    db.Grades.Where(u => u.StudentId == id).ExecuteDelete();
+                    db.Attendances.Where(u => u.StudentId == id).ExecuteDelete();
                     db.Students.Remove(student); // Удаляем из базы
                     db.SaveChanges(); // Сохраняем
                     MessageBox.Show("Данные о студенте удалены.");
@@ -152,7 +242,7 @@ namespace PrackSchool15
                 MessageBox.Show("Пожалуйста, выберите студента для удаления.");
             }
         }
-       
+
     }
 }
 

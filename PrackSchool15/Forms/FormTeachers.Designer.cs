@@ -57,6 +57,7 @@
             dataGridViewTeacher.Dock = DockStyle.Fill;
             dataGridViewTeacher.Location = new Point(10, 71);
             dataGridViewTeacher.Name = "dataGridViewTeacher";
+            dataGridViewTeacher.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewTeacher.Size = new Size(891, 387);
             dataGridViewTeacher.TabIndex = 1;
             // 

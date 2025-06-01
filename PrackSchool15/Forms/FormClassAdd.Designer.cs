@@ -29,16 +29,14 @@
         private void InitializeComponent()
         {
             panelFill = new Panel();
-            comboBoxNameClass = new ComboBox();
+            textBoxNameClass = new TextBox();
+            comboBoxFIOTeach = new ComboBox();
             labelNameTeacher = new Label();
             labelNameClass = new Label();
-            textBoxClassNumber = new TextBox();
-            labelNumberClass = new Label();
             dataGridViewClassAdd = new DataGridView();
             panelBottom = new Panel();
             button1 = new Button();
             buttonSave = new Button();
-            comboBoxFIOTeach = new ComboBox();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClassAdd).BeginInit();
             panelBottom.SuspendLayout();
@@ -46,12 +44,10 @@
             // 
             // panelFill
             // 
+            panelFill.Controls.Add(textBoxNameClass);
             panelFill.Controls.Add(comboBoxFIOTeach);
-            panelFill.Controls.Add(comboBoxNameClass);
             panelFill.Controls.Add(labelNameTeacher);
             panelFill.Controls.Add(labelNameClass);
-            panelFill.Controls.Add(textBoxClassNumber);
-            panelFill.Controls.Add(labelNumberClass);
             panelFill.Controls.Add(dataGridViewClassAdd);
             panelFill.Controls.Add(panelBottom);
             panelFill.Dock = DockStyle.Fill;
@@ -61,52 +57,42 @@
             panelFill.Size = new Size(376, 628);
             panelFill.TabIndex = 0;
             // 
-            // comboBoxNameClass
+            // textBoxNameClass
             // 
-            comboBoxNameClass.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            comboBoxNameClass.FormattingEnabled = true;
-            comboBoxNameClass.Location = new Point(32, 118);
-            comboBoxNameClass.Name = "comboBoxNameClass";
-            comboBoxNameClass.Size = new Size(135, 29);
-            comboBoxNameClass.TabIndex = 12;
+            textBoxNameClass.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            textBoxNameClass.Location = new Point(32, 54);
+            textBoxNameClass.Name = "textBoxNameClass";
+            textBoxNameClass.Size = new Size(100, 29);
+            textBoxNameClass.TabIndex = 14;
+            // 
+            // comboBoxFIOTeach
+            // 
+            comboBoxFIOTeach.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            comboBoxFIOTeach.FormattingEnabled = true;
+            comboBoxFIOTeach.Location = new Point(25, 123);
+            comboBoxFIOTeach.Name = "comboBoxFIOTeach";
+            comboBoxFIOTeach.Size = new Size(238, 29);
+            comboBoxFIOTeach.TabIndex = 13;
             // 
             // labelNameTeacher
             // 
             labelNameTeacher.AutoSize = true;
             labelNameTeacher.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelNameTeacher.Location = new Point(32, 167);
+            labelNameTeacher.Location = new Point(32, 95);
             labelNameTeacher.Name = "labelNameTeacher";
-            labelNameTeacher.Size = new Size(123, 25);
+            labelNameTeacher.Size = new Size(128, 25);
             labelNameTeacher.TabIndex = 6;
-            labelNameTeacher.Text = "Имя учителя";
+            labelNameTeacher.Text = "ФИО учителя";
             // 
             // labelNameClass
             // 
             labelNameClass.AutoSize = true;
             labelNameClass.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelNameClass.Location = new Point(32, 90);
+            labelNameClass.Location = new Point(32, 26);
             labelNameClass.Name = "labelNameClass";
             labelNameClass.Size = new Size(95, 25);
             labelNameClass.TabIndex = 4;
             labelNameClass.Text = "Название";
-            // 
-            // textBoxClassNumber
-            // 
-            textBoxClassNumber.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxClassNumber.Location = new Point(32, 48);
-            textBoxClassNumber.Name = "textBoxClassNumber";
-            textBoxClassNumber.Size = new Size(135, 29);
-            textBoxClassNumber.TabIndex = 3;
-            // 
-            // labelNumberClass
-            // 
-            labelNumberClass.AutoSize = true;
-            labelNumberClass.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelNumberClass.Location = new Point(32, 20);
-            labelNumberClass.Name = "labelNumberClass";
-            labelNumberClass.Size = new Size(61, 25);
-            labelNumberClass.TabIndex = 2;
-            labelNumberClass.Text = "Класс";
             // 
             // dataGridViewClassAdd
             // 
@@ -131,6 +117,7 @@
             // 
             // button1
             // 
+            button1.DialogResult = DialogResult.Cancel;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             button1.Location = new Point(3, 6);
             button1.Name = "button1";
@@ -142,6 +129,7 @@
             // 
             // buttonSave
             // 
+            buttonSave.DialogResult = DialogResult.OK;
             buttonSave.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonSave.Location = new Point(185, 6);
             buttonSave.Name = "buttonSave";
@@ -152,15 +140,6 @@
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
             // 
-            // comboBoxFIOTeach
-            // 
-            comboBoxFIOTeach.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            comboBoxFIOTeach.FormattingEnabled = true;
-            comboBoxFIOTeach.Location = new Point(32, 195);
-            comboBoxFIOTeach.Name = "comboBoxFIOTeach";
-            comboBoxFIOTeach.Size = new Size(238, 29);
-            comboBoxFIOTeach.TabIndex = 13;
-            // 
             // FormClassAdd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -168,6 +147,7 @@
             ClientSize = new Size(376, 628);
             Controls.Add(panelFill);
             Name = "FormClassAdd";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormClassAdd";
             panelFill.ResumeLayout(false);
             panelFill.PerformLayout();
@@ -181,13 +161,11 @@
         private Panel panelFill;
         private DataGridView dataGridViewClassAdd;
         private Panel panelBottom;
-        private Label labelNumberClass;
         private Label labelNameClass;
         private Label labelNameTeacher;
         private Button button1;
         private Button buttonSave;
-        public TextBox textBoxClassNumber;
-        public ComboBox comboBoxNameClass;
         public ComboBox comboBoxFIOTeach;
+        public TextBox textBoxNameClass;
     }
 }

@@ -69,7 +69,7 @@ namespace PrackSchool15
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if(SelectedStudent==null)
+           /* if(SelectedStudent==null)
             {
                 try
                 {
@@ -102,33 +102,30 @@ namespace PrackSchool15
                         db.SaveChanges();
                         studentRoleId = newRole.RoleId;
                     }
-
-                    // 3. Создаём нового пользователя
                     var newUser = new User
                     {
                         Username = username,
-                        Password = password, // Хеширование пароля!
-                        RoleId = studentRoleId //  Присваиваем ID роли
+                        Password = password, // Рекомендуется хешировать
+                        RoleId = studentRoleId
                     };
 
                     db.Users.Add(newUser);
-                    db.SaveChanges(); // Сохраняем, чтобы у User появился ID
+                    db.SaveChanges();
 
-                    // 4. Создаём студента, связанного с новым пользователем
                     var newStudent = new Student
                     {
-                        User = newUser, // Теперь это объект User
+                        UserId = newUser.UserId, // Устанавливаем внешний ключ напрямую
                         DateOfBirth = DateOnly.FromDateTime(dateTimePickerDate.Value),
                         Address = textBoxAdress.Text,
                         ClassId = (int)comboBoxClass.SelectedValue,
                         PhoneNumber = textBoxNumber.Text,
-                        AdmissionDate = DateOnly.FromDateTime(dateTimePickerDate.Value),
+                        AdmissionDate = DateOnly.FromDateTime(dateTimePickerAdm.Value), // Используем Adm date picker
                         ParentName = textBoxNameParents.Text,
                         ParentPhone = textBoxNumberParents.Text,
                     };
+
                     db.Students.Add(newStudent);
                     db.SaveChanges();
-
                     MessageBox.Show("Пользователь и студент успешно добавлены!");
                     this.Close();
                 }
@@ -152,7 +149,7 @@ namespace PrackSchool15
 
                 MessageBox.Show("Пользователь и студент успешно отредакрированны!");
             
-            }
+            }*/
 
             
         }

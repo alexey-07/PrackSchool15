@@ -18,6 +18,7 @@ namespace PrackSchool15
 
         public object textBoxNameTeacher { get; private set; }
         public Teacher Teacher { get; }
+ 
 
         public FormTeacherAdd()
         {
@@ -29,6 +30,8 @@ namespace PrackSchool15
             InitializeComponent();
             Teacher = teacher;
         }
+
+        
 
         protected override void OnLoad(EventArgs e)
         {
@@ -69,7 +72,7 @@ namespace PrackSchool15
       
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if(Teacher==null)
+           /* if(Teacher==null)
             {
                 try
                 {
@@ -184,7 +187,7 @@ namespace PrackSchool15
 
                 MessageBox.Show("Пользователь и учитель успешно отредакрированны!");
 
-            }
+            }*/
 
 
         }

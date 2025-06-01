@@ -410,7 +410,6 @@
         private Label labelSalary;
         public DateTimePicker dateTimePickerDateHare;
         private Label labelHireDate;
-        private ComboBox comboBoxSubject;
         private Label label1;
         public TextBox textBoxTeachUsername;
         private Label labelTeachUsername;
@@ -418,5 +417,6 @@
         private Panel panel1;
         private Button buttonSave;
         private Button buttonCancel;
+        public ComboBox comboBoxSubject;
     }
 }

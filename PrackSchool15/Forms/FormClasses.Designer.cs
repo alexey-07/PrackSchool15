@@ -57,6 +57,7 @@
             dataGridViewClass.Dock = DockStyle.Fill;
             dataGridViewClass.Location = new Point(10, 68);
             dataGridViewClass.Name = "dataGridViewClass";
+            dataGridViewClass.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewClass.Size = new Size(897, 379);
             dataGridViewClass.TabIndex = 1;
             // 
@@ -82,6 +83,7 @@
             buttonDelClass.TabIndex = 3;
             buttonDelClass.Text = "Удалить";
             buttonDelClass.UseVisualStyleBackColor = true;
+            buttonDelClass.Click += buttonDelClass_Click;
             // 
             // buttonEditClass
             // 
@@ -93,6 +95,7 @@
             buttonEditClass.TabIndex = 2;
             buttonEditClass.Text = "Редактировать";
             buttonEditClass.UseVisualStyleBackColor = true;
+            buttonEditClass.Click += buttonEditClass_Click;
             // 
             // buttonAddClass
             // 
