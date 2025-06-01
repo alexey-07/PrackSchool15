@@ -159,10 +159,27 @@ namespace PrackSchool15
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    db.Classes.Remove(classe); // Удаляем из базы
-                    db.SaveChanges(); // Сохраняем
+                    // Получаем всех студентов этого класса
+                    var studentIds = db.Students
+                        .Where(s => s.ClassId == id)
+                        .Select(s => s.StudentId)
+                        .ToList();
+
+                    // Удаляем оценки этих студентов
+                    db.Grades.Where(g => studentIds.Contains(g.StudentId)).ExecuteDelete();
+
+                    // Удаляем студентов класса
+                    db.Students.Where(u => u.ClassId == id).ExecuteDelete();
+
+                    // Удаляем уроки класса
+                    db.Lessons.Where(u => u.ClassId == id).ExecuteDelete();
+
+                    // Удаляем сам класс
+                    db.Classes.Remove(classe);
+
+                    db.SaveChanges();
                     MessageBox.Show("Данные о классе удалены.");
-                    UpdateTable(); // Обновляем таблицу
+                    UpdateTable();
                 }
             }
             else

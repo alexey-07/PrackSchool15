@@ -276,13 +276,29 @@ namespace PrackSchool15
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
-                if (confirmResult == DialogResult.Yes)
+                if(confirmResult == DialogResult.Yes)
                 {
+                    // Получаем ID всех уроков этого учителя
+                    var lessonIds = db.Lessons
+                        .Where(l => l.TeacherId == id)
+                        .Select(l => l.LessonId)
+                        .ToList();
+                    db.Attendances.Where(a => lessonIds.Contains(a.LessonId)).ExecuteDelete();
+                    // Удаляем оценки этих уроков
+                    db.Grades.Where(g => lessonIds.Contains(g.LessonId)).ExecuteDelete();
+
+                    // Удаляем уроки учителя
                     db.Lessons.Where(u => u.TeacherId == id).ExecuteDelete();
-                    db.Teachers.Remove(teacher); // Удаляем из базы
-                    db.SaveChanges(); // Сохраняем
-                    MessageBox.Show("Данные о учителя удалены.");
-                    LoadTeachers(); // Обновляем таблицу
+
+                    // Обнуляем TeacherId в классах, где этот учитель был классным руководителем
+                    db.Classes.Where(c => c.TeacherId == id).ExecuteUpdate(c => c.SetProperty(x => x.TeacherId, (int?)null));
+
+                    // Удаляем самого учителя
+                    db.Teachers.Remove(teacher);
+
+                    db.SaveChanges();
+                    MessageBox.Show("Данные об учителе удалены.");
+                    LoadTeachers();
                 }
             }
             else
