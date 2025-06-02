@@ -83,6 +83,7 @@
             buttonDelLesson.TabIndex = 5;
             buttonDelLesson.Text = "Удалить";
             buttonDelLesson.UseVisualStyleBackColor = true;
+            buttonDelLesson.Click += buttonDelLesson_Click;
             // 
             // buttonEditLesson
             // 
@@ -94,6 +95,7 @@
             buttonEditLesson.TabIndex = 4;
             buttonEditLesson.Text = "Редактировать";
             buttonEditLesson.UseVisualStyleBackColor = true;
+            buttonEditLesson.Click += buttonEditLesson_Click;
             // 
             // buttonAddLesson
             // 
@@ -105,6 +107,7 @@
             buttonAddLesson.TabIndex = 3;
             buttonAddLesson.Text = "Добавить";
             buttonAddLesson.UseVisualStyleBackColor = true;
+            buttonAddLesson.Click += buttonAddLesson_Click;
             // 
             // FormLessons
             // 

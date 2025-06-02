@@ -20,6 +20,26 @@ namespace PrackSchool15
         {
             InitializeComponent();
         }
+
+        private void UpdateTable()
+        {
+            // Преобразуем список оценок в анонимный тип для DataGridView
+            var lessonsWithDetails = db.Lessons.Local
+                .Select(l => new
+                {
+                    l.LessonId,
+                    НазваниеКласса = (l.Class != null) ? l.Class.ClassName : null,
+                    Предмет = (l.Subject != null) ? l.Subject.SubjectName : null,
+                    Учитель = (l.Teacher != null) ? $"{l.Teacher.SurnameTeacher} {l.Teacher.NameTeacher} {l.Teacher.PatronymicTeacher}" : null, // Собираем ФИО учителя
+                    ДатаУрока = l.LessonDate,
+                    НачалоУрока = l.StartTime, //  Предполагаем, что это `TimeSpan` или `DateTime`
+                    КонецУрока = l.EndTime,  //  Предполагаем, что это `TimeSpan` или `DateTime`
+                    Кабинет = l.RoomNumber
+                }).ToList();
+
+            dataGridViewLesson.DataSource = lessonsWithDetails;
+            /*dataGridViewAtten.Columns["AttendanceId"].Visible = false;*/
+        }
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -37,6 +57,7 @@ namespace PrackSchool15
             var lessonsWithDetails = db.Lessons.Local
                 .Select(l => new
                 {
+                    l.LessonId,
                     НазваниеКласса = (l.Class != null) ? l.Class.ClassName : null,
                     Предмет = (l.Subject != null) ? l.Subject.SubjectName : null,
                     Учитель = (l.Teacher != null) ? $"{l.Teacher.SurnameTeacher} {l.Teacher.NameTeacher} {l.Teacher.PatronymicTeacher}" : null, // Собираем ФИО учителя
@@ -47,6 +68,112 @@ namespace PrackSchool15
                 }).ToList();
 
             dataGridViewLesson.DataSource = lessonsWithDetails;
+        }
+
+        private void buttonAddLesson_Click(object sender, EventArgs e)
+        {
+            FormLessonAdd form = new FormLessonAdd();
+
+            DialogResult result = form.ShowDialog();
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+      /*      MessageBox.Show(form.comboBoxRoomNum.SelectedItem.ToString());*/
+            Lesson lessonly = new Lesson();
+            try
+            {
+                lessonly = new Lesson
+                {
+                    ClassId = (int)form.comboBoxClassInto.SelectedValue,
+                    SubjectId = (int)form.comboBoxSubjectInto.SelectedValue,
+                    TeacherId = (int)form.comboBoxTeacherInto.SelectedValue,
+                    LessonDate = DateOnly.FromDateTime(form.dateTimePickerLessonDate.Value),
+                    StartTime = TimeOnly.FromDateTime(form.dateTimePickerStartTime.Value),
+                    EndTime = TimeOnly.FromDateTime(form.dateTimePickerEndTime.Value),
+
+                    RoomNumber =form.comboBoxRoomNum.SelectedItem?.ToString()
+                };
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+            db.Lessons.Add(lessonly);
+            db.SaveChanges();
+
+            UpdateTable();
+        }
+
+        private void buttonEditLesson_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewLesson.SelectedRows.Count == 0)
+                return;
+            int id = (int)dataGridViewLesson.SelectedRows[0].Cells["LessonId"].Value;
+            var lessony = db.Lessons.FirstOrDefault(u => u.LessonId == id);
+
+            if (lessony != null)
+            {
+                // Открываем форму редактирования, передаем выбранного студента
+                FormLessonAdd editForm = new FormLessonAdd(lessony);
+                if (editForm.ShowDialog() == DialogResult.OK)  //  Проверяем, что форма редактирования была закрыта успешно
+                {
+                    var lessonsWithDetails = db.Lessons.Local
+                  .Select(l => new
+                  {
+                      l.LessonId,
+                      НазваниеКласса = (l.Class != null) ? l.Class.ClassName : null,
+                      Предмет = (l.Subject != null) ? l.Subject.SubjectName : null,
+                      Учитель = (l.Teacher != null) ? $"{l.Teacher.SurnameTeacher} {l.Teacher.NameTeacher} {l.Teacher.PatronymicTeacher}" : null, // Собираем ФИО учителя
+                      ДатаУрока = l.LessonDate,
+                      НачалоУрока = l.StartTime, //  Предполагаем, что это `TimeSpan` или `DateTime`
+                      КонецУрока = l.EndTime,  //  Предполагаем, что это `TimeSpan` или `DateTime`
+                      Кабинет = l.RoomNumber
+                  }).ToList();
+
+                    dataGridViewLesson.DataSource = lessonsWithDetails;
+                    dataGridViewLesson.Columns["LessonId"].Visible = false;
+                    db.SaveChanges();
+                    MessageBox.Show("Данные о расписании изменены");
+
+                }
+            }
+        }
+
+        private void buttonDelLesson_Click(object sender, EventArgs e)
+        {
+            int id = (int)dataGridViewLesson.SelectedRows[0].Cells["LessonId"].Value;
+            var lessony = db.Lessons.FirstOrDefault(u => u.LessonId == id);
+
+            if (lessony != null)
+            {
+                var confirmResult = MessageBox.Show(
+                    "Вы уверены, что хотите удалить данные об посещаемости?",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+
+                    // Удаляем сам класс
+                    db.Lessons.Remove(lessony);
+
+                    db.SaveChanges();
+                    MessageBox.Show("Данные о посещаемости удалены.");
+                    UpdateTable();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите посещаемость для удаления.");
+            }
         }
     }
 }
