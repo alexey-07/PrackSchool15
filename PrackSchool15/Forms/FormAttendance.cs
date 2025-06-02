@@ -137,7 +137,7 @@ namespace PrackSchool15
                     dataGridViewAtten.Columns["AttendanceId"].Visible = false;
                     db.SaveChanges();
                     MessageBox.Show("Данные о посещаемости изменены");
-
+                    UpdateTable();
                 }
             }
         }
