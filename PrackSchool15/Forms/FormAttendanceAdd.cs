@@ -12,37 +12,36 @@ using System.Windows.Forms;
 
 namespace PrackSchool15
 {
-
-    public partial class FormGradesAdd : Form
+    public partial class FormAttendanceAdd : Form
     {
         private School15PrackContext db;
-        public FormGradesAdd()
+        public FormAttendanceAdd()
         {
             InitializeComponent();
         }
 
-        public FormGradesAdd(Grade gradee)
+        public FormAttendanceAdd(Attendance atteny)
         {
             InitializeComponent();
-            Gradee = gradee;
+            Atteny = atteny;
         }
 
-        public Grade Gradee { get; }
+        public Attendance Atteny { get; }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             db = new School15PrackContext();
 
-            comboBoxNameUser.DataSource = db.Students
+            comboBoxUsernameAdd.DataSource = db.Students
                 .Select(u => new
                 {
                     u.StudentId,
                     u.User.Username
                 })
                 .ToList();
-            comboBoxNameUser.DisplayMember = "Username";
-            comboBoxNameUser.ValueMember = "studentid";
+            comboBoxUsernameAdd.DisplayMember = "Username";
+            comboBoxUsernameAdd.ValueMember = "studentid";
 
             comboBoxLessonInfo.DataSource = db.Lessons
                 .Select(u => new
@@ -55,41 +54,41 @@ namespace PrackSchool15
             comboBoxLessonInfo.DisplayMember = "inf";
             comboBoxLessonInfo.ValueMember = "lessonid";
 
-            if (Gradee != null)
+            if (Atteny != null)
             {
-                comboBoxNameUser.SelectedValue = Gradee.StudentId;
-                comboBoxLessonInfo.SelectedValue = Gradee.LessonId;
-                dateTimePickerGrade.Value = ((DateOnly)Gradee.GradeDate).ToDateTime(new TimeOnly(0, 0, 0));
-                textBoxGradeNum.Text = Gradee.Grade1.ToString();
-                textBoxComments.Text = Gradee.Comment;
+                comboBoxUsernameAdd.SelectedValue = Atteny.StudentId;
+                comboBoxLessonInfo.SelectedValue = Atteny.LessonId;
+                dateTimePickerAttenDate.Value = ((DateOnly)Atteny.AttendanceDate).ToDateTime(new TimeOnly(0, 0, 0));
+                checkBoxPresent.Checked = Atteny.IsPresent ?? false;
+                textBoxReasonAbsence.Text = Atteny.ReasonForAbsence;
             }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (Gradee == null)
+            if (Atteny == null)
             {
                 try
                 {
                     // 1. Валидация данных
-                    if (comboBoxNameUser.SelectedItem ==null||
+                    if (comboBoxUsernameAdd.SelectedItem == null ||
                         comboBoxLessonInfo.SelectedItem == null ||
-                      string.IsNullOrWhiteSpace (textBoxGradeNum.Text)||
-                      string.IsNullOrWhiteSpace(textBoxComments.Text))
+                      checkBoxPresent.Checked ==null||
+                      string.IsNullOrWhiteSpace(textBoxReasonAbsence.Text))
                     {
                         MessageBox.Show("Пожалуйста, заполните все поля.");
                         return;
                     }
 
-                    var newGrade = new Grade
+                    var newAttendance = new Attendance
                     {
-                        StudentId = (int)comboBoxNameUser.SelectedValue,
+                        StudentId = (int)comboBoxUsernameAdd.SelectedValue,
                         LessonId = (int)comboBoxLessonInfo.SelectedValue,
-                        Grade1 = Int32.Parse(textBoxGradeNum.Text),
-                        GradeDate = DateOnly.FromDateTime(dateTimePickerGrade.Value),
-                        Comment = textBoxComments.Text
+                        AttendanceDate = DateOnly.FromDateTime(dateTimePickerAttenDate.Value),
+                        IsPresent = checkBoxPresent.Checked,
+                        ReasonForAbsence = textBoxReasonAbsence.Text
                     };
-                    db.Grades.Add(newGrade);
+                    db.Attendances.Add(newAttendance);
                     db.SaveChanges();
                     MessageBox.Show("Посещаемость успешно добавлена!");
                     DialogResult = DialogResult.OK;
@@ -106,11 +105,11 @@ namespace PrackSchool15
             else
             {
 
-                Gradee.StudentId = (int)comboBoxNameUser.SelectedValue; ;
-                Gradee.LessonId = (int)comboBoxLessonInfo.SelectedValue;
-                Gradee.Grade1 = Int32.Parse(textBoxGradeNum.Text);
-                Gradee.GradeDate = DateOnly.FromDateTime(dateTimePickerGrade.Value);
-                Gradee.Comment = textBoxComments.Text;
+                Atteny.StudentId = (int)comboBoxUsernameAdd.SelectedValue; ;
+                Atteny.LessonId = (int)comboBoxLessonInfo.SelectedValue;
+                Atteny.AttendanceDate = DateOnly.FromDateTime(dateTimePickerAttenDate.Value);
+                Atteny.IsPresent= checkBoxPresent.Checked;
+                Atteny.ReasonForAbsence = textBoxReasonAbsence.Text;
                 db.SaveChanges();
 
                 MessageBox.Show("Пользователь и класс успешно отредакрированны!");

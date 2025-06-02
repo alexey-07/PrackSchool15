@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             panelFill = new Panel();
             buttonLogin = new Button();
             textBoxPassword = new TextBox();
@@ -117,6 +118,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(341, 313);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormLogin";

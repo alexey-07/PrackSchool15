@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLessons));
             panelFill = new Panel();
             dataGridViewLesson = new DataGridView();
             panelTop = new Panel();
@@ -111,6 +112,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(916, 477);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormLessons";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Расписание";

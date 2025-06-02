@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGrades));
             panelFill = new Panel();
             dataGridViewGrade = new DataGridView();
             panelTop = new Panel();
@@ -115,6 +116,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(912, 475);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormGrades";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Оценки";

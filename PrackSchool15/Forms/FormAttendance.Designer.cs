@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAttendance));
             panelFill = new Panel();
             dataGridViewAtten = new DataGridView();
             panelTop = new Panel();
@@ -57,6 +58,7 @@
             dataGridViewAtten.Dock = DockStyle.Fill;
             dataGridViewAtten.Location = new Point(10, 66);
             dataGridViewAtten.Name = "dataGridViewAtten";
+            dataGridViewAtten.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewAtten.Size = new Size(892, 414);
             dataGridViewAtten.TabIndex = 1;
             // 
@@ -82,6 +84,7 @@
             buttonDelAtten.TabIndex = 5;
             buttonDelAtten.Text = "Удалить";
             buttonDelAtten.UseVisualStyleBackColor = true;
+            buttonDelAtten.Click += buttonDelAtten_Click;
             // 
             // buttonEditAtten
             // 
@@ -93,6 +96,7 @@
             buttonEditAtten.TabIndex = 4;
             buttonEditAtten.Text = "Редактировать";
             buttonEditAtten.UseVisualStyleBackColor = true;
+            buttonEditAtten.Click += buttonEditAtten_Click;
             // 
             // buttonAddAtten
             // 
@@ -104,6 +108,7 @@
             buttonAddAtten.TabIndex = 3;
             buttonAddAtten.Text = "Добавить";
             buttonAddAtten.UseVisualStyleBackColor = true;
+            buttonAddAtten.Click += buttonAddAtten_Click;
             // 
             // FormAttendance
             // 
@@ -111,6 +116,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(912, 490);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAttendance";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Посещаемость";

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormStudentsAdd));
             panelFill = new Panel();
             labelPassword = new Label();
             textBoxPassword = new TextBox();
@@ -293,6 +294,7 @@
             BackColor = Color.White;
             ClientSize = new Size(523, 603);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormStudentsAdd";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Добавление";

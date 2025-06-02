@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTeacherAdd));
             panelFill = new Panel();
             labelPassword = new Label();
             textBoxPasswordTeach = new TextBox();
@@ -375,6 +376,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(484, 710);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormTeacherAdd";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Добавление";

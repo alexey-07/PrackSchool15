@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormClassAdd));
             panelFill = new Panel();
             textBoxNameClass = new TextBox();
             comboBoxFIOTeach = new ComboBox();
@@ -146,6 +147,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(376, 628);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormClassAdd";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormClassAdd";

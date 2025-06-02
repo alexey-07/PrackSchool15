@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             panelTop = new Panel();
             labelName = new Label();
             panelBottom = new Panel();
@@ -175,6 +176,7 @@
             Controls.Add(panelFill);
             Controls.Add(panelBottom);
             Controls.Add(panelTop);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Главный экран";

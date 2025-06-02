@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTeachers));
             panelFill = new Panel();
             dataGridViewTeacher = new DataGridView();
             panelTop = new Panel();
@@ -115,6 +116,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(911, 468);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormTeachers";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Учителя";

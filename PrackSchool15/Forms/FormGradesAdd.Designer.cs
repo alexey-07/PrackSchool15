@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGradesAdd));
             panelFill = new Panel();
             textBoxComments = new TextBox();
             labelComment = new Label();
@@ -214,6 +215,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(686, 601);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormGradesAdd";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormGradesAdd";

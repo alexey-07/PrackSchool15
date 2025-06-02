@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForTeacher));
             panelFill = new Panel();
             buttonCancel = new Button();
             buttonAtten = new Button();
@@ -112,6 +113,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(377, 289);
             Controls.Add(panelFill);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormForTeacher";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormForTeacher";
