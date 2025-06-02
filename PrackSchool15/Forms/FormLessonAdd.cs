@@ -69,7 +69,7 @@ namespace PrackSchool15
          *//*            a.LessonId,*//*
                      a.RoomNumber
                  }
-                 ).ToList();*/
+          *//*       ).ToList();*//*
             comboBoxRoomNum.DataSource = db.Lessons
                 .Where(a => a.RoomNumber != null && a.RoomNumber.Length <= 10)
                 .Select(a => new
@@ -80,7 +80,7 @@ namespace PrackSchool15
                 .Distinct()
                 .ToList();
             comboBoxRoomNum.DisplayMember = "RoomNumber";
-            comboBoxRoomNum.ValueMember = "LessonId";
+            comboBoxRoomNum.ValueMember = "LessonId";*/
 
             if (Lessony != null)
             {
@@ -90,7 +90,7 @@ namespace PrackSchool15
                 dateTimePickerLessonDate.Value = ((DateOnly)Lessony.LessonDate).ToDateTime(new TimeOnly(0, 0, 0));
               /*   dateTimePickerStartTime.Value = Lessony.StartTime.ToDateTime(TimeOnly.MinValue);
                 *//*  dateTimePickerEndTime.Value = Lessony.LessonDate.*/
-                comboBoxRoomNum.SelectedValue = Lessony.RoomNumber;
+                textBoxRoom.Text = Lessony.RoomNumber;
             }
         }
 
@@ -104,9 +104,9 @@ namespace PrackSchool15
                     if (comboBoxClassInto.SelectedItem == null ||
                         comboBoxSubjectInto.SelectedItem == null ||
                          comboBoxTeacherInto.SelectedItem == null ||
-                      comboBoxRoomNum.SelectedItem == null)
-                      
-                    {
+                       string.IsNullOrWhiteSpace(textBoxRoom.Text))
+
+                {
                         MessageBox.Show("Пожалуйста, заполните все поля.");
                         return;
                     }
@@ -119,7 +119,7 @@ namespace PrackSchool15
                         LessonDate = DateOnly.FromDateTime(dateTimePickerLessonDate.Value),
                         StartTime=TimeOnly.FromDateTime(dateTimePickerStartTime.Value),
                         EndTime = TimeOnly.FromDateTime(dateTimePickerEndTime.Value),
-                        RoomNumber = comboBoxRoomNum.SelectedItem?.ToString()
+                        RoomNumber = textBoxRoom.Text
                     };
                     db.Lessons.Add(newLesson);
                     db.SaveChanges();
@@ -144,7 +144,7 @@ namespace PrackSchool15
                 Lessony.LessonDate = DateOnly.FromDateTime(dateTimePickerLessonDate.Value);
                 Lessony.StartTime = TimeOnly.FromDateTime(dateTimePickerStartTime.Value);
                 Lessony.EndTime = TimeOnly.FromDateTime(dateTimePickerEndTime.Value);
-                Lessony.RoomNumber = comboBoxRoomNum.SelectedItem?.ToString();
+                Lessony.RoomNumber =textBoxRoom.Text;
                 db.SaveChanges();
 
                 MessageBox.Show("Расписание успешно отредакрированно!");

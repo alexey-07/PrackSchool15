@@ -38,7 +38,7 @@ namespace PrackSchool15
                 }).ToList();
 
             dataGridViewLesson.DataSource = lessonsWithDetails;
-            /*dataGridViewAtten.Columns["AttendanceId"].Visible = false;*/
+            dataGridViewLesson.Columns["LessonId"].Visible = false;
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -68,6 +68,7 @@ namespace PrackSchool15
                 }).ToList();
 
             dataGridViewLesson.DataSource = lessonsWithDetails;
+            dataGridViewLesson.Columns["LessonId"].Visible = false;
         }
 
         private void buttonAddLesson_Click(object sender, EventArgs e)
@@ -93,7 +94,7 @@ namespace PrackSchool15
                     StartTime = TimeOnly.FromDateTime(form.dateTimePickerStartTime.Value),
                     EndTime = TimeOnly.FromDateTime(form.dateTimePickerEndTime.Value),
 
-                    RoomNumber =form.comboBoxRoomNum.SelectedItem?.ToString()
+                    RoomNumber =form.textBoxRoom.Text
                 };
 
             }
@@ -141,6 +142,7 @@ namespace PrackSchool15
                     dataGridViewLesson.Columns["LessonId"].Visible = false;
                     db.SaveChanges();
                     MessageBox.Show("Данные о расписании изменены");
+                    UpdateTable();
 
                 }
             }
@@ -161,7 +163,7 @@ namespace PrackSchool15
 
                 if (confirmResult == DialogResult.Yes)
                 {
-
+                    db.Attendances.Where(u => u.LessonId == id).ExecuteDelete();
                     // Удаляем сам класс
                     db.Lessons.Remove(lessony);
 

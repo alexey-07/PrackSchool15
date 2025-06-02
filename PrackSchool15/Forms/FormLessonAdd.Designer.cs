@@ -30,7 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLessonAdd));
             panelFill = new Panel();
-            comboBoxRoomNum = new ComboBox();
+            dateTimePickerEndTime = new DateTimePicker();
+            dateTimePickerStartTime = new DateTimePicker();
             labelRoom = new Label();
             labelEndTime = new Label();
             labelStartTime = new Label();
@@ -46,8 +47,7 @@
             panelBottom = new Panel();
             buttonCancel = new Button();
             buttonSave = new Button();
-            dateTimePickerStartTime = new DateTimePicker();
-            dateTimePickerEndTime = new DateTimePicker();
+            textBoxRoom = new TextBox();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLessonAdd).BeginInit();
             panelBottom.SuspendLayout();
@@ -55,9 +55,9 @@
             // 
             // panelFill
             // 
+            panelFill.Controls.Add(textBoxRoom);
             panelFill.Controls.Add(dateTimePickerEndTime);
             panelFill.Controls.Add(dateTimePickerStartTime);
-            panelFill.Controls.Add(comboBoxRoomNum);
             panelFill.Controls.Add(labelRoom);
             panelFill.Controls.Add(labelEndTime);
             panelFill.Controls.Add(labelStartTime);
@@ -78,14 +78,21 @@
             panelFill.Size = new Size(558, 643);
             panelFill.TabIndex = 0;
             // 
-            // comboBoxRoomNum
+            // dateTimePickerEndTime
             // 
-            comboBoxRoomNum.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            comboBoxRoomNum.FormattingEnabled = true;
-            comboBoxRoomNum.Location = new Point(48, 492);
-            comboBoxRoomNum.Name = "comboBoxRoomNum";
-            comboBoxRoomNum.Size = new Size(73, 29);
-            comboBoxRoomNum.TabIndex = 12;
+            dateTimePickerEndTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dateTimePickerEndTime.Location = new Point(48, 419);
+            dateTimePickerEndTime.Name = "dateTimePickerEndTime";
+            dateTimePickerEndTime.Size = new Size(200, 29);
+            dateTimePickerEndTime.TabIndex = 14;
+            // 
+            // dateTimePickerStartTime
+            // 
+            dateTimePickerStartTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dateTimePickerStartTime.Location = new Point(48, 345);
+            dateTimePickerStartTime.Name = "dateTimePickerStartTime";
+            dateTimePickerStartTime.Size = new Size(200, 29);
+            dateTimePickerStartTime.TabIndex = 13;
             // 
             // labelRoom
             // 
@@ -239,21 +246,13 @@
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
             // 
-            // dateTimePickerStartTime
+            // textBoxRoom
             // 
-            dateTimePickerStartTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dateTimePickerStartTime.Location = new Point(48, 345);
-            dateTimePickerStartTime.Name = "dateTimePickerStartTime";
-            dateTimePickerStartTime.Size = new Size(200, 29);
-            dateTimePickerStartTime.TabIndex = 13;
-            // 
-            // dateTimePickerEndTime
-            // 
-            dateTimePickerEndTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dateTimePickerEndTime.Location = new Point(48, 419);
-            dateTimePickerEndTime.Name = "dateTimePickerEndTime";
-            dateTimePickerEndTime.Size = new Size(200, 29);
-            dateTimePickerEndTime.TabIndex = 14;
+            textBoxRoom.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            textBoxRoom.Location = new Point(48, 498);
+            textBoxRoom.Name = "textBoxRoom";
+            textBoxRoom.Size = new Size(100, 29);
+            textBoxRoom.TabIndex = 15;
             // 
             // FormLessonAdd
             // 
@@ -286,12 +285,12 @@
         private Label labelLessonDate;
         public ComboBox comboBoxTeacherInto;
         private Label labelTeacherInto;
-        public ComboBox comboBoxRoomNum;
         private Label labelRoom;
         private Label labelEndTime;
         private Button buttonCancel;
         private Button buttonSave;
         public DateTimePicker dateTimePickerEndTime;
         public DateTimePicker dateTimePickerStartTime;
+        public TextBox textBoxRoom;
     }
 }
