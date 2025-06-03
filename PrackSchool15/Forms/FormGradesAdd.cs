@@ -44,7 +44,7 @@ namespace PrackSchool15
             comboBoxNameUser.DisplayMember = "Username";
             comboBoxNameUser.ValueMember = "studentid";
 
-            comboBoxLessonInfo.DataSource = db.Lessons
+            /*comboBoxLessonInfo.DataSource = db.Lessons
                 .Select(u => new
                 {
                     u.LessonId,
@@ -53,10 +53,21 @@ namespace PrackSchool15
                 })
                 .ToList();
             comboBoxLessonInfo.DisplayMember = "inf";
+            comboBoxLessonInfo.ValueMember = "lessonid";*/
+            comboBoxLessonInfo.DataSource = db.Lessons
+                .Select(u => new
+                {
+                    u.LessonId,
+                    inf = u.Class.ClassName + ", " + u.Teacher.NameTeacher + " " + u.Teacher.SurnameTeacher + " " + u.Teacher.PatronymicTeacher + ", " + "Дата: " + u.LessonDate + ", " + "Начало урока: " +
+                     u.StartTime + ", " + "Конец урока: " + u.EndTime + ", " + "Кабинет: " + u.RoomNumber
+                })
+                .ToList();
+            comboBoxLessonInfo.DisplayMember = "inf";
             comboBoxLessonInfo.ValueMember = "lessonid";
 
             if (Gradee != null)
             {
+                this.Text = "Редактирование оценок";
                 comboBoxNameUser.SelectedValue = Gradee.StudentId;
                 comboBoxLessonInfo.SelectedValue = Gradee.LessonId;
                 dateTimePickerGrade.Value = ((DateOnly)Gradee.GradeDate).ToDateTime(new TimeOnly(0, 0, 0));

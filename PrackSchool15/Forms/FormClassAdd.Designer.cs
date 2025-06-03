@@ -72,7 +72,7 @@
             comboBoxFIOTeach.FormattingEnabled = true;
             comboBoxFIOTeach.Location = new Point(25, 123);
             comboBoxFIOTeach.Name = "comboBoxFIOTeach";
-            comboBoxFIOTeach.Size = new Size(238, 29);
+            comboBoxFIOTeach.Size = new Size(288, 29);
             comboBoxFIOTeach.TabIndex = 13;
             // 
             // labelNameTeacher
@@ -150,7 +150,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormClassAdd";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormClassAdd";
+            Text = "Добавление";
             panelFill.ResumeLayout(false);
             panelFill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClassAdd).EndInit();

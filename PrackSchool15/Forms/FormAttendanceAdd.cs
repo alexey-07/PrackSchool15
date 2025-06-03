@@ -47,8 +47,8 @@ namespace PrackSchool15
                 .Select(u => new
                 {
                     u.LessonId,
-                    inf = u.Class.ClassName + " " + u.Teacher.NameTeacher + " " + u.Teacher.SurnameTeacher + " " + u.Teacher.PatronymicTeacher + " " + u.LessonDate + " " +
-                     u.StartTime + " " + u.EndTime + " " + u.RoomNumber
+                    inf = u.Class.ClassName + ", " + u.Teacher.NameTeacher + " " + u.Teacher.SurnameTeacher + " " + u.Teacher.PatronymicTeacher + ", " + "Дата: " + u.LessonDate + ", " + "Начало урока: " +
+                     u.StartTime + ", "+"Конец урока: " + u.EndTime + ", " +"Кабинет: "+ u.RoomNumber
                 })
                 .ToList();
             comboBoxLessonInfo.DisplayMember = "inf";
@@ -56,6 +56,7 @@ namespace PrackSchool15
 
             if (Atteny != null)
             {
+                this.Text = "Редактирование посещаения";
                 comboBoxUsernameAdd.SelectedValue = Atteny.StudentId;
                 comboBoxLessonInfo.SelectedValue = Atteny.LessonId;
                 dateTimePickerAttenDate.Value = ((DateOnly)Atteny.AttendanceDate).ToDateTime(new TimeOnly(0, 0, 0));

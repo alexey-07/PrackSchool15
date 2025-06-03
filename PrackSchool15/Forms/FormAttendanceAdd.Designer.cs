@@ -67,7 +67,7 @@
             panelFill.Location = new Point(0, 0);
             panelFill.Name = "panelFill";
             panelFill.Padding = new Padding(10);
-            panelFill.Size = new Size(616, 601);
+            panelFill.Size = new Size(965, 601);
             panelFill.TabIndex = 0;
             // 
             // textBoxReasonAbsence
@@ -133,7 +133,7 @@
             comboBoxLessonInfo.FormattingEnabled = true;
             comboBoxLessonInfo.Location = new Point(41, 121);
             comboBoxLessonInfo.Name = "comboBoxLessonInfo";
-            comboBoxLessonInfo.Size = new Size(547, 29);
+            comboBoxLessonInfo.Size = new Size(911, 29);
             comboBoxLessonInfo.TabIndex = 5;
             // 
             // labelLessonInfo
@@ -161,9 +161,9 @@
             labelNameUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelNameUser.Location = new Point(41, 22);
             labelNameUser.Name = "labelNameUser";
-            labelNameUser.Size = new Size(90, 21);
+            labelNameUser.Size = new Size(104, 21);
             labelNameUser.TabIndex = 2;
-            labelNameUser.Text = "Имя юзера";
+            labelNameUser.Text = "Имя ученика";
             // 
             // dataGridViewAttenAdd
             // 
@@ -172,7 +172,7 @@
             dataGridViewAttenAdd.Dock = DockStyle.Fill;
             dataGridViewAttenAdd.Location = new Point(10, 10);
             dataGridViewAttenAdd.Name = "dataGridViewAttenAdd";
-            dataGridViewAttenAdd.Size = new Size(596, 523);
+            dataGridViewAttenAdd.Size = new Size(945, 523);
             dataGridViewAttenAdd.TabIndex = 1;
             // 
             // panelBottom
@@ -183,14 +183,14 @@
             panelBottom.Location = new Point(10, 533);
             panelBottom.Name = "panelBottom";
             panelBottom.Padding = new Padding(10);
-            panelBottom.Size = new Size(596, 58);
+            panelBottom.Size = new Size(945, 58);
             panelBottom.TabIndex = 0;
             // 
             // buttonCancel
             // 
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonCancel.Location = new Point(335, 6);
+            buttonCancel.Location = new Point(267, 6);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Padding = new Padding(10);
             buttonCancel.Size = new Size(196, 47);
@@ -202,7 +202,7 @@
             // 
             buttonSave.DialogResult = DialogResult.OK;
             buttonSave.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonSave.Location = new Point(65, 6);
+            buttonSave.Location = new Point(31, 6);
             buttonSave.Name = "buttonSave";
             buttonSave.Padding = new Padding(10);
             buttonSave.Size = new Size(196, 47);
@@ -215,12 +215,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(616, 601);
+            ClientSize = new Size(965, 601);
             Controls.Add(panelFill);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAttendanceAdd";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormAttendanceAdd";
+            Text = "Добавление";
             panelFill.ResumeLayout(false);
             panelFill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAttenAdd).EndInit();

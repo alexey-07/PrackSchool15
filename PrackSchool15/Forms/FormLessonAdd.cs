@@ -84,6 +84,7 @@ namespace PrackSchool15
 
             if (Lessony != null)
             {
+                this.Text = "Редактирование расписания";
                 comboBoxClassInto.SelectedValue = Lessony.ClassId;
                 comboBoxSubjectInto.SelectedValue = Lessony.SubjectId;
                 comboBoxTeacherInto.SelectedValue = Lessony.TeacherId;

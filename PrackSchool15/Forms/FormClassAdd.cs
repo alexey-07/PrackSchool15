@@ -48,7 +48,7 @@ namespace PrackSchool15
 
             if (Classe != null)
             {
-                this.Text = "Редактирование сотрудника";
+                this.Text = "Редактирование класса";
                 textBoxNameClass.Text = Classe.ClassName;
                 comboBoxFIOTeach.SelectedValue = Classe.TeacherId;
             }

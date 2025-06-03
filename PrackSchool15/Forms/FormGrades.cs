@@ -26,7 +26,7 @@ namespace PrackSchool15
                 .Select(c => new
                 {
                     c.GradeId,
-                    Студент = (c.Student != null && c.Student.User != null) ? c.Student.User.Username : null,
+                    Ученик = (c.Student != null && c.Student.User != null) ? c.Student.User.Username : null,
                     Оценки = c.Grade1,
                     ДатаВыставления = c.GradeDate,
                     Комментарий = c.Comment,
@@ -55,7 +55,7 @@ namespace PrackSchool15
                 .Select(c => new
                 {
                     c.GradeId,
-                    Студент = (c.Student != null && c.Student.User != null) ? c.Student.User.Username : null,
+                    Ученик = (c.Student != null && c.Student.User != null) ? c.Student.User.Username : null,
                     Оценки = c.Grade1,
                     ДатаВыставления = c.GradeDate,
                     Комментарий = c.Comment,
@@ -122,7 +122,7 @@ namespace PrackSchool15
                   .Select(c => new
                   {    
                       c.GradeId,
-                      Студент = (c.Student != null && c.Student.User != null) ? c.Student.User.Username : null,
+                      Ученик = (c.Student != null && c.Student.User != null) ? c.Student.User.Username : null,
                       Оценки = c.Grade1,
                       ДатаВыставления = c.GradeDate,
                       Комментарий = c.Comment,

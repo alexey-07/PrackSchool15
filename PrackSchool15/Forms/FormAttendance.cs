@@ -24,16 +24,16 @@ namespace PrackSchool15
         {
             // Преобразуем список оценок в анонимный тип для DataGridView
             var attendanceDetails = db.Attendances.Local
-                 .Select(a => new
-                 {
-                     a.AttendanceId,
-                     UsernameСтудента = (a.Student != null && a.Student.User != null) ? a.Student.User.Username : null,
-                     ДатаПосещения = a.AttendanceDate,
-                     Присутствовал = a.IsPresent.HasValue ? (a.IsPresent.Value ? "Да" : "Нет") : "Неизвестно",
-                     ПричинаОтсутствия = a.ReasonForAbsence,
-                     Предмет = (a.Lesson != null && a.Lesson.Subject != null && !string.IsNullOrEmpty(a.Lesson.Subject.SubjectName)) ? a.Lesson.Subject.SubjectName : null,
-                     Учитель = (a.Lesson != null && a.Lesson.Teacher != null) ? a.Lesson.Teacher.SurnameTeacher : null // Добавляем фамилию учителя
-                 }).ToList();
+               .Select(a => new
+               {
+                   a.AttendanceId,
+                   Ученик = (a.Student != null && a.Student.User != null) ? a.Student.User.Username : null,
+                   ДатаПосещения = a.AttendanceDate,
+                   Присутствовал = a.IsPresent.HasValue ? (a.IsPresent.Value ? "Да" : "Нет") : "Неизвестно",
+                   Причина = a.ReasonForAbsence,
+                   Предмет = (a.Lesson != null && a.Lesson.Subject != null && !string.IsNullOrEmpty(a.Lesson.Subject.SubjectName)) ? a.Lesson.Subject.SubjectName : null,
+                   Учитель = (a.Lesson != null && a.Lesson.Teacher != null) ? a.Lesson.Teacher.SurnameTeacher : null // Добавляем фамилию учителя
+               }).ToList();
 
             dataGridViewAtten.DataSource = attendanceDetails;
             dataGridViewAtten.Columns["AttendanceId"].Visible = false;
@@ -55,16 +55,16 @@ namespace PrackSchool15
 
             // Преобразуем список посещаемости в анонимный тип для DataGridView
             var attendanceDetails = db.Attendances.Local
-                .Select(a => new
-                {
-                    a.AttendanceId,
-                    ИмяЮзера = (a.Student != null && a.Student.User != null) ? a.Student.User.Username : null,
-                    ДатаПосещения = a.AttendanceDate,
-                    Присутствовал = a.IsPresent.HasValue ? (a.IsPresent.Value ? "Да" : "Нет") : "Неизвестно",
-                    ПричинаОтсутствия = a.ReasonForAbsence,
-                    Предмет = (a.Lesson != null && a.Lesson.Subject != null && !string.IsNullOrEmpty(a.Lesson.Subject.SubjectName)) ? a.Lesson.Subject.SubjectName : null,
-                    Учитель = (a.Lesson != null && a.Lesson.Teacher != null) ? a.Lesson.Teacher.SurnameTeacher : null // Добавляем фамилию учителя
-                }).ToList();
+               .Select(a => new
+               {
+                   a.AttendanceId,
+                   Ученик = (a.Student != null && a.Student.User != null) ? a.Student.User.Username : null,
+                   ДатаПосещения = a.AttendanceDate,
+                   Присутствовал = a.IsPresent.HasValue ? (a.IsPresent.Value ? "Да" : "Нет") : "Неизвестно",
+                   Причина = a.ReasonForAbsence,
+                   Предмет = (a.Lesson != null && a.Lesson.Subject != null && !string.IsNullOrEmpty(a.Lesson.Subject.SubjectName)) ? a.Lesson.Subject.SubjectName : null,
+                   Учитель = (a.Lesson != null && a.Lesson.Teacher != null) ? a.Lesson.Teacher.SurnameTeacher : null // Добавляем фамилию учителя
+               }).ToList();
 
             dataGridViewAtten.DataSource = attendanceDetails;
             dataGridViewAtten.Columns["AttendanceId"].Visible = false;

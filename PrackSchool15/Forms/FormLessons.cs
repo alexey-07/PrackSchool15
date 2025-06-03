@@ -164,6 +164,7 @@ namespace PrackSchool15
                 if (confirmResult == DialogResult.Yes)
                 {
                     db.Attendances.Where(u => u.LessonId == id).ExecuteDelete();
+                    db.Grades.Where(u => u.LessonId == id).ExecuteDelete();
                     // Удаляем сам класс
                     db.Lessons.Remove(lessony);
 

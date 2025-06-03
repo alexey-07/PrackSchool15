@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLessonAdd));
             panelFill = new Panel();
+            textBoxRoom = new TextBox();
             dateTimePickerEndTime = new DateTimePicker();
             dateTimePickerStartTime = new DateTimePicker();
             labelRoom = new Label();
@@ -47,7 +48,6 @@
             panelBottom = new Panel();
             buttonCancel = new Button();
             buttonSave = new Button();
-            textBoxRoom = new TextBox();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLessonAdd).BeginInit();
             panelBottom.SuspendLayout();
@@ -77,6 +77,14 @@
             panelFill.Padding = new Padding(10);
             panelFill.Size = new Size(558, 643);
             panelFill.TabIndex = 0;
+            // 
+            // textBoxRoom
+            // 
+            textBoxRoom.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            textBoxRoom.Location = new Point(48, 498);
+            textBoxRoom.Name = "textBoxRoom";
+            textBoxRoom.Size = new Size(100, 29);
+            textBoxRoom.TabIndex = 15;
             // 
             // dateTimePickerEndTime
             // 
@@ -246,14 +254,6 @@
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
             // 
-            // textBoxRoom
-            // 
-            textBoxRoom.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxRoom.Location = new Point(48, 498);
-            textBoxRoom.Name = "textBoxRoom";
-            textBoxRoom.Size = new Size(100, 29);
-            textBoxRoom.TabIndex = 15;
-            // 
             // FormLessonAdd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -263,7 +263,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormLessonAdd";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormLessonAdd";
+            Text = "Добавление";
             panelFill.ResumeLayout(false);
             panelFill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLessonAdd).EndInit();

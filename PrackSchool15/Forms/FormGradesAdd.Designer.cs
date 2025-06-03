@@ -67,7 +67,7 @@
             panelFill.Location = new Point(0, 0);
             panelFill.Name = "panelFill";
             panelFill.Padding = new Padding(10);
-            panelFill.Size = new Size(686, 601);
+            panelFill.Size = new Size(926, 601);
             panelFill.TabIndex = 0;
             // 
             // textBoxComments
@@ -140,7 +140,7 @@
             comboBoxLessonInfo.FormattingEnabled = true;
             comboBoxLessonInfo.Location = new Point(34, 109);
             comboBoxLessonInfo.Name = "comboBoxLessonInfo";
-            comboBoxLessonInfo.Size = new Size(635, 29);
+            comboBoxLessonInfo.Size = new Size(879, 29);
             comboBoxLessonInfo.TabIndex = 4;
             // 
             // comboBoxNameUser
@@ -158,9 +158,9 @@
             labelNameUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelNameUser.Location = new Point(34, 19);
             labelNameUser.Name = "labelNameUser";
-            labelNameUser.Size = new Size(90, 21);
+            labelNameUser.Size = new Size(104, 21);
             labelNameUser.TabIndex = 2;
-            labelNameUser.Text = "Имя юзера";
+            labelNameUser.Text = "Имя ученика";
             // 
             // dataGridViewGradesAdd
             // 
@@ -170,7 +170,7 @@
             dataGridViewGradesAdd.Location = new Point(10, 10);
             dataGridViewGradesAdd.Name = "dataGridViewGradesAdd";
             dataGridViewGradesAdd.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewGradesAdd.Size = new Size(666, 522);
+            dataGridViewGradesAdd.Size = new Size(906, 522);
             dataGridViewGradesAdd.TabIndex = 1;
             // 
             // panelBottom
@@ -181,7 +181,7 @@
             panelBottom.Location = new Point(10, 532);
             panelBottom.Name = "panelBottom";
             panelBottom.Padding = new Padding(10);
-            panelBottom.Size = new Size(666, 59);
+            panelBottom.Size = new Size(906, 59);
             panelBottom.TabIndex = 0;
             // 
             // buttonCancel
@@ -213,12 +213,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(686, 601);
+            ClientSize = new Size(926, 601);
             Controls.Add(panelFill);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormGradesAdd";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormGradesAdd";
+            Text = "Добавление";
             panelFill.ResumeLayout(false);
             panelFill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGradesAdd).EndInit();
