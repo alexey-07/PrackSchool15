@@ -156,7 +156,7 @@ namespace PrackSchool15
             if (lessony != null)
             {
                 var confirmResult = MessageBox.Show(
-                    "Вы уверены, что хотите удалить данные об посещаемости?",
+                    "Вы уверены, что хотите удалить данные об расписании?",
                     "Подтверждение удаления",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -169,13 +169,13 @@ namespace PrackSchool15
                     db.Lessons.Remove(lessony);
 
                     db.SaveChanges();
-                    MessageBox.Show("Данные о посещаемости удалены.");
+                    MessageBox.Show("Данные о расписании удалены.");
                     UpdateTable();
                 }
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите посещаемость для удаления.");
+                MessageBox.Show("Пожалуйста, выберите расписание для удаления.");
             }
         }
     }

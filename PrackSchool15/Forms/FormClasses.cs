@@ -78,18 +78,6 @@ namespace PrackSchool15
 
             try
             {
-
-                /*if (String.IsNullOrEmpty(frtextBoxClassNumber.Text) ||
-                    String.IsNullOrEmpty(form.textBoxAdress.Text))
-                {
-                    throw new Exception("Название и адрес здания обязательно должны быть введены");
-                }*/
-
-                /* if (form.checkBoxCancel.Checked && DateOnly.FromDateTime(form.dateTimePickerDateOfCancel.Value) < DateOnly.FromDateTime(form.dateTimePickerDateOfRegistration.Value))
-                 {
-                     throw new Exception("Дата закрытия организации не может быть меньше даты регистрации");
-                 }*/
-
                 classy = new Class
                 {
                     ClassName = form.textBoxNameClass.Text,
@@ -184,7 +172,7 @@ namespace PrackSchool15
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите учителя для удаления.");
+                MessageBox.Show("Пожалуйста, выберите класс для удаления.");
             }
         }
     }

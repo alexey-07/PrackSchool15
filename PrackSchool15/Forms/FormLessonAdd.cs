@@ -63,25 +63,6 @@ namespace PrackSchool15
             comboBoxTeacherInto.DisplayMember = "FIO";
             comboBoxTeacherInto.ValueMember = "TeacherId";
 
-            /* comboBoxRoomNum.DataSource = db.Lessons
-                 .Select(a => new
-                 {
-         *//*            a.LessonId,*//*
-                     a.RoomNumber
-                 }
-          *//*       ).ToList();*//*
-            comboBoxRoomNum.DataSource = db.Lessons
-                .Where(a => a.RoomNumber != null && a.RoomNumber.Length <= 10)
-                .Select(a => new
-                {
-                    a.LessonId,
-                    a.RoomNumber
-                })
-                .Distinct()
-                .ToList();
-            comboBoxRoomNum.DisplayMember = "RoomNumber";
-            comboBoxRoomNum.ValueMember = "LessonId";*/
-
             if (Lessony != null)
             {
                 this.Text = "Редактирование расписания";

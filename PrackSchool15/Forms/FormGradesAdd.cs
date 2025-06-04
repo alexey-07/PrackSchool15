@@ -44,16 +44,6 @@ namespace PrackSchool15
             comboBoxNameUser.DisplayMember = "Username";
             comboBoxNameUser.ValueMember = "studentid";
 
-            /*comboBoxLessonInfo.DataSource = db.Lessons
-                .Select(u => new
-                {
-                    u.LessonId,
-                    inf = u.Class.ClassName + " " + u.Teacher.NameTeacher + " " + u.Teacher.SurnameTeacher + " " + u.Teacher.PatronymicTeacher + " " + u.LessonDate + " " +
-                     u.StartTime + " " + u.EndTime + " " + u.RoomNumber
-                })
-                .ToList();
-            comboBoxLessonInfo.DisplayMember = "inf";
-            comboBoxLessonInfo.ValueMember = "lessonid";*/
             comboBoxLessonInfo.DataSource = db.Lessons
                 .Select(u => new
                 {
@@ -102,7 +92,7 @@ namespace PrackSchool15
                     };
                     db.Grades.Add(newGrade);
                     db.SaveChanges();
-                    MessageBox.Show("Посещаемость успешно добавлена!");
+                    MessageBox.Show("Оценка успешно добавлена!");
                     DialogResult = DialogResult.OK;
                 }
                 catch (EntityException ex)
@@ -124,7 +114,7 @@ namespace PrackSchool15
                 Gradee.Comment = textBoxComments.Text;
                 db.SaveChanges();
 
-                MessageBox.Show("Пользователь и класс успешно отредакрированны!");
+                MessageBox.Show("Оценка успешно отредакрированна!");
 
             }
         }
